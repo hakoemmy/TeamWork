@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <!-- Metadata -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <meta name="description" content="Team work is internal social network for organizations’ employees">
+     <meta name="keywords" content="Articles, Employees and teamwork">
+     <meta name="author" content="Emmanuel Hakorimana">
+     <title>Teamwork| Home</title>
+     <link rel="icon" 
+     type="image/png" 
+     href="../../img/tw-icon.png" />
+     <!-- Metadata -->
+     <!-- CSS Styles -->
+     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap" rel="stylesheet">
+     <link rel="stylesheet" media="Screen and (max-width:768px)"href="css/mobile.css">
+     <link rel="stylesheet" type="text/css" href="../../css/style.css">
+     <link rel="stylesheet" type="text/css" href="../../css/mobile.css">
+     <!-- CSS Styles -->
+</head>
+
+<body>
+     <!-- #start header section -->
+     <header>
+          <nav id="navbar">
+               <div id="container">
+                    <h1>
+                         <a href="../../index.html" Class="logo">
+                         <span class="highlit-logo-left">Team</span>
+                         <span class="highlit-logo-right">work</span>  
+
+                         </a>
+                         <div class="location-input-container">
+                                   <input type="text" class="location-input" id="searchtrip" placeholder="Search Article">
+                                   <input type="button" class="icon-custom-date">
+                         </div>
+                    </h1>
+                 
+                    <ul>
+                        
+                         <li><a class="normal-link" href="../../index.html">home</a></li>
+                         <li><a class="normal-link" href="../login.html">log out</a></li>
+                         <li><a class="post-article-btn" href="../../html/employee/newArticle.html">Write a new article</a></li>
+                    </ul>
+               </div>
+          </nav>
+          <div class="right">
+               <h1>
+                    <a href="./index.html" Class="logo">
+                    <span class="highlit-logo-left">Team</span>
+                    <span class="highlit-logo-right">work</span>
+                    </a> 
+               </h1>
+               <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a class="normal-link" href="../../index.html">home</a>
+                    <hr class="menu-separtor">
+                    <a class="normal-link" href="../../login.html">log out</a>
+                    <hr class="menu-separtor">
+                    <div class="art-btn-container">
+                         <a class="post-article-btn" href="../../html/employee/newArticle.html">write a new article</a>
+                    </div>
+               </div>
+               <span class="navbtn" onclick="openNav()">&#9776;</span>
+          </div>
+     </header>
+   <div class="custom-body">
+        <div class="centered row">
+                <div class="trends" style="width: 20%">
+                     <h2>My published articles</h2>
+                     <div class="grid-card-small-1 row-fixed">
+                               <div>  <img class="img-square-small" src="../../img/tech1.jpg" /> </div>
+                                
+                                  <div class="left">
+                          <h5>Global Energy Inequality Goes Deeper Than Bitcoin </h5><br>
+
+                          </div>
+                          <div class = "border-small">
+                            <img class="icon" src="../../img/view.png" onclick="location.replace('./singleArticle.html')"/>
+                        </div>
+                          </div>
+                          <div class="grid-card-small-1 row-fixed">
+                                    <div>  <img class="img-square-small" src="../../img/tech1.jpg" /> </div>
+                                     
+                                       <div class="left">
+                               <h5>Six Habits of Generous, Successful People</h5><br>
+                               </div>
+                               <div class = "border-small">
+                                   <img class="icon" src="../../img/view.png" onclick="location.replace('./singleArticle.html')"/>
+                               </div>
+                               </div>
+                               <div class="grid-card-small-1 row-fixed">
+                                         <div>  <img class="img-square-small" src="../../img/tech2.jpg" /> </div>
+                                          
+                                            <div class="left">
+                                    <h5>New investment firm wants to change the way we fund early.</h5><br>
+                                    </div>
+                                    <div class = "border-small">
+                                        <img class="icon" src="../../img/view.png" onclick="location.replace('./singleArticle.html')"/>
+                                    </div>
+                                    </div>
+                                    <div class="grid-card-small-1 row-fixed">
+                                              <div>  <img class="img-square-small" src="../../img/tech2.jpg" /> </div>
+                                               
+                                                 <div class="left">
+                                         <h5>Global Energy Inequality Goes Deeper Than Bitcoin </h5><br>
+                                         </div>
+                                         <div class = "border-small">
+                                             <img class="icon" src="../../img/view.png" onclick="location.replace('./singleArticle.html')"/>
+                                         </div>
+                                         </div>
+                    </div>
+              <div class="styled-articles">
+               <h1 class="global-head">Global Energy Inequality Goes Deeper Than Bitcoin</h1>
+               <div class=" row-fixed">
+                    <div>  <img class="img-circle-small" src="../../img/tech1.jpg" /> </div>
+                     
+                       <div class="left">
+               <label class="names">Emmanuel HAKORIMANA</label><br>
+               <label class="p-summary">Aug 14, 3 min read </label>
+                <div class="border">
+                <img class="icon" alt="Delete" title="Delete article" src="../../img/delete.png" onclick="dialogbox('Are you sure you want to delete this article?')"/>
+                <img class="icon" alt="Edit" title="Edit article" src="../../img/edit.png" onclick="location.replace('./editArticle.html')"/>
+                <img class="icon" alt="Share" title="Share article" src="../../img/share.png" onclick="shareArticle()"/>
+            </div>
+               </div>
+            
+               </div>
+     <p class="art-text">
+            I have a background in electricity, from when I was an investment banker. I worked in a Natural Resources & Power group for about 8 years and modelled electricity systems and assets in the UK and China in the context of acquisitions, capital raisings, restructurings, and regulatory submissions. One of the banks that I worked for was HSBC, in their emerging markets M&A team, and I know China well. The models, created in groups, were used to support perhaps $4–5 billion equivalent of transactions, including public tender offers, acquisition finance, syndicated loans, and bond sales. The only time I went back to my old business school for course work was for modules offered by Decision Sciences, one of which was an in-depth power systems dynamics course. The financial models were built using @Risk statistical software to apply a distribution shape to inputs. When I left investment banking, I purchased (with partners) an electricity business in Italy that had eight run-of-river hydro plants and two CCGT facilities.
+            I’m also an environmentalist. I grew up mainly in rural Canada and I like the outdoors a little bit more than people. Now I live in Switzerland and do a lot of mountain climbing. I donate to two (moderate) environmental groups.
+            I believe that crypto is the best way to reduce inequality in the world and provide financial inclusion to low-income people. I think that most people get into crypto for reasons related to value and values.
+            I write this article because I’m sick of being confronted by people, even others in crypto, about crypto allegedly being an environmental disaster. It isn’t. That is an egregious lie.
+            Patient Zero
+            <br><br>
+            Almost all news articles that repeat the lie that crypto is an environmental problem can be traced back to one source: Alex de Vries, a twenty-something year old who has zero knowledge of the electricity industry, power system modelling, China, or any related real-world experience. He blogs from home on digiconomist.net. His “reports” are about as unscientific and unethical as you can get.
+            While claiming to be unbiased and touting “peer reviewed” “academic articles” his site uses incendiary language to describe the bitcoin computers that maintain system security and administration as “consuming huge amounts of energy” which have now, apparently, reached “epic proportions”. This “massive energy consumption” isn’t the biggest problem, though, according to de Vries; it is that “the network is mostly fueled by coal-fired power plants in China”, resulting in “an extreme carbon footprint for each unique Bitcoin transaction.”[1]
+            He goes on to write: “Additional research published in Nature Climate Change (October 2018) even suggested that Bitcoin mining alone could push global warning ‘above 2 °C within less than three decades’.”
+            He then compares the efficiency of bitcoin to the Visa system, writing “the current global payment system handles 6,800 times more digital transactions per day than Bitcoin does. Even on this flawed comparison, Bitcoin still requires 3,400 times more energy than an average non-cash transaction.”
+            He also claims that there are “half a billion people who might be mining Bitcoin without even knowing it” and then, generously, says that he doesn’t include these miners in his calculations. Yet, elsewhere on his blog, he says that the only way to mine bitcoin today is by using specialized mining equipment, like an Antminer S9. I don’t have an Antminer S9 at home (at least, I don’t think I do), but I understand that they are about the size of a small refrigerator and throw off a fair bit of heat. I think that half a billion people might notice. Anyway, regardless of where he gets this “information” the only proper response to it is to think WTF that isn’t very likely and not to repeat it.[2]
+            Antidote <br><br>
+               </p>
+               
+<h2 class="left">Comments</h2>
+<div>
+     <div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'write')">Write</button>
+  <button class="tablinks" onclick="openTab(event, 'preview')">Preview</button>
+</div>
+
+<div id="write" class="tabcontent">
+  <textarea id="comment" class="txt-full" placeholder="Leave a comment"></textarea>
+  <div class="right-item"><a href="#" class="custom-btn ">Comment</a>    </div>
+  
+
+</div>
+
+<div id="preview" class="tabcontent">
+  <p id="comment-preview">Comment preview</p> 
+</div>
+<div class="comment-post">
+<div class="commenter"><label><b>Emmanuel HAKORIMANA</b> commented 25 minutes Ago</label></div>
+<div class="commenter-post">Almost all news articles that repeat the lie that crypto is an environmental problem can be traced back</div>
+</div>
+<div class="comment-post">
+     <div class="commenter"><label><b>Emmy MUCUNGUZI</b> commented 2 hours Ago</label></div>
+     <div class="commenter-post">there are “half a billion people who might be mining Bitcoin without even knowing it”</div>
+     </div>
+     <div class="comment-post">
+          <div class="commenter"><label><b>Egide KAREKEZI</b> commented 5 days Ago</label></div>
+          <div class="commenter-post">I think that most people get into crypto for reasons related to value and values.</div>
+          </div>
+</div>
+
+
+            </div>  
+             
+           </div>
+           
+   </div>
+   <div id="dialogbox" class="modal">
+      
+     <!-- Dialog content -->
+     <div class="modal-content">
+             <div class="modal-header">
+                     <span class="close" onclick="closeDialog()">&times;</span>
+                     <h2>TeamWork</h2>
+                   </div>
+                   <div class="modal-body">
+       <span class="dialog-content dialog-content-js"></span>
+     </div>
+     <div class="modal-buttons">
+         <input type="button" class="custom-btn custom-margin" value="No" onclick="closeDialog()"/>
+         <input type="button" class="custom-btn custom-margin danger" value="Yes" onclick="closeDialog()"/>
+     </div>
+     </div>
+   
+   </div>
+    <!-- Share article-->
+ <div class="modal-view">
+          <div class="share-article share-article-js">
+              <form class="custom-form">
+              <h2 class="most-title">Share article to:<label class="closeDialog" style="float: right" onclick="closeShareArticle()">&times;</label></h2>
+      
+                <input class="custon-text-input" type="email" placeholder="Email of recipients" />
+                <a href="#" type="submit" class="custom-btn ">Share</a>
+              </form>
+      </div>   
+      </div>
+     <div class="footer">
+               <p>©2019 All Right reserved</p>
+     </div>
+      <!-- #end header section  -->
+     <!-- Javascript  -->
+     <script type="text/javascript" src="../../js/script.js"></script>
+     <!-- Javascript  -->
+</body>
+
+</html>
