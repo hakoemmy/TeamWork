@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <!-- Metadata -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <meta name="description" content="Team work is internal social network for organizations’ employees">
+     <meta name="keywords" content="Articles, Employees and teamwork">
+     <meta name="author" content="Emmanuel Hakorimana">
+     <title>Teamwork| Home</title>
+     <link rel="icon" 
+     type="image/png" 
+     href="../../img/tw-icon.png" />
+     <!-- Metadata -->
+     <!-- CSS Styles -->
+     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap" rel="stylesheet">
+     <link rel="stylesheet" media="Screen and (max-width:768px)"href="css/mobile.css">
+     <link rel="stylesheet" type="text/css" href="../../css/style.css">
+     <link rel="stylesheet" type="text/css" href="../../css/mobile.css">
+     <!-- CSS Styles -->
+</head>
+
+<body>
+     <!-- #start header section -->
+     <header>
+          <nav id="navbar">
+               <div id="container">
+                    <h1>
+                         <a href="../../index.html" Class="logo">
+                         <span class="highlit-logo-left">Team</span>
+                         <span class="highlit-logo-right">work</span>  
+
+                         </a>
+                         <div class="location-input-container">
+                                   <input type="text" class="location-input" id="searchtrip" placeholder="Search Article">
+                                   <input type="button" class="icon-custom-date">
+                         </div>
+                    </h1>
+                 
+                    <ul>
+                        
+                         <li><a class="normal-link" href="../../index.html">home</a></li>
+                         <li><a class="normal-link" href="../login.html">log out</a></li>
+                         <li><a class="post-article-btn" href="./singleArticle.html">Publish</a></li>
+                    </ul>
+               </div>
+          </nav>
+          <div class="right">
+               <h1>
+                    <a href="../../index.html" Class="logo">
+                    <span class="highlit-logo-left">Team</span>
+                    <span class="highlit-logo-right">work</span>
+                    </a> 
+               </h1>
+               <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a class="normal-link" href="../../index.html">home</a>
+                    <hr class="menu-separtor">
+                    <a class="normal-link" href="#">log in</a>
+                    <hr class="menu-separtor">
+                    <a class="normal-link" href="../signup.html">sign up</a>
+                    <hr class="menu-separtor">
+                    <div class="art-btn-container">
+                         <a class="post-article-btn" href="./singleArticle.html">Publish</a>
+                    </div>
+               </div>
+               <span class="navbtn" onclick="openNav()">&#9776;</span>
+          </div>
+     </header>
+   <div class="custom-body">
+        <div class="centered row">
+                <div class="trends" style="width: 20%">
+                     <h2>My published articles</h2>
+                     <div class="grid-card-small-1 row-fixed">
+                               <div>  <img class="img-square-small" src="../../img/tech1.jpg" /> </div>
+                                
+                                  <div class="left">
+                          <h5>Global Energy Inequality Goes Deeper Than Bitcoin </h5><br>
+
+                          </div>
+                          <div class="broder-small">
+                              <img class="icon" src="../../img/view.png" onclick="location.replace('./singleArticle.html')" />
+                          </div>
+                          </div>
+                          <div class="grid-card-small-1 row-fixed">
+                                    <div>  <img class="img-square-small" src="../../img/tech1.jpg" /> </div>
+                                     
+                                       <div class="left">
+                               <h5>Six Habits of Generous, Successful People</h5><br>
+                               </div>
+                               <div class="broder-small">
+                                   <img class="icon" src="../../img/view.png" onclick="location.replace('./singleArticle.html')" />
+                               </div>
+                               </div>
+                               <div class="grid-card-small-1 row-fixed">
+                                         <div>  <img class="img-square-small" src="../../img/tech2.jpg" /> </div>
+                                          
+                                            <div class="left">
+                                    <h5>New investment firm wants to change the way we fund early.</h5><br>
+                                    </div>
+                                    <div class="broder-small">
+                                        <img class="icon" src="../../img/view.png" onclick="location.replace('./singleArticle.html')" />
+                                    </div>
+                                    </div>
+                                    <div class="grid-card-small-1 row-fixed">
+                                              <div>  <img class="img-square-small" src="../../img/tech2.jpg" /> </div>
+                                               
+                                                 <div class="left">
+                                         <h5>Global Energy Inequality Goes Deeper Than Bitcoin </h5><br>
+                                         </div>
+                                         <div class="broder-small">
+                                             <img class="icon" src="../../img/view.png" onclick="location.replace('./singleArticle.html')" />
+                                         </div>
+                                         </div>
+                    </div>
+                    
+              <div class="styled-articles">
+                    <h1>New Article</h1>
+                    <h4>Article title</h4>
+              <input class="custom-h custom-input" type="text"  placeholder="Topic of the article"/>
+               <div class=" row-fixed">
+         
+               </div>
+
+               <div  id="write" class="tabcontent">
+     <textarea id="comment" class="edit-article-area" placeholder="Write your article here"></textarea>
+
+               </div>
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'write')">Open editor</button>
+  <button class="tablinks" onclick="openTab(event, 'preview')">Preview</button>
+</div>
+
+<div id="write" class="tabcontent">
+  <textarea id="comment" class="txt-full" placeholder="Leave a comment"></textarea>
+  <div class="right-item"><a href="#" class="custom-btn ">Comment</a>    </div>
+  
+
+</div>
+
+<div id="preview" class="tabcontent">
+  <p id="comment-preview">Comment preview</p> 
+</div>
+
+
+            </div>  
+             
+           </div>
+           
+   </div>
+   <div id="dialogbox" class="modal">
+      
+     <!-- Dialog content -->
+     <div class="modal-content">
+             <div class="modal-header">
+                     <span class="close" onclick="closeDialog()">&times;</span>
+                     <h2>TeamWork</h2>
+                   </div>
+                   <div class="modal-body">
+       <span class="dialog-content dialog-content-js"></span>
+     </div>
+     <div class="modal-buttons">
+         <input type="button" class="custom-btn custom-margin" value="No" onclick="closeDialog()"/>
+         <input type="button" class="custom-btn custom-margin danger" value="Yes" onclick="closeDialog()"/>
+     </div>
+     </div>
+   
+   </div>
+     <div class="footer">
+               <p>©2019 All Right reserved</p>
+     </div>
+      <!-- #end header section  -->
+     <!-- Javascript  -->
+     <script type="text/javascript" src="../../js/script.js"></script>
+     <!-- Javascript  -->
+</body>
+
+</html>
