@@ -808,3 +808,15 @@ cursor: pointer;
 }
 
 /*Load more feeds*/
+
+/* How it works page */
+.grid-card p{
+  padding: 20px;
+}
+.grid-how{
+  height: 350px;
+}
+.img-circle{
+  padding-top: 10px;
+}
+/* How it works page */
