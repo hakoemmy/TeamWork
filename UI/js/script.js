@@ -7,6 +7,11 @@ const closeNav = () => {
 };
 // Tabbed comment panel
 const openTab = (evt, tabName) => {
+ const element = document.querySelector('.empty');
+ if(element !=undefined){
+  element.style.margin = '0px';
+ }
+  
   if(tabName === 'preview'){
     const comment = document.querySelector('#comment');
     const prev = document.querySelector('#comment-preview');
