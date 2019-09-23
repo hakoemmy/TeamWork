@@ -6,6 +6,7 @@
   }
   .sidenav {
     padding-top: 15px;
+   
    }
    .trends{
      display: none;
@@ -58,10 +59,20 @@
   .commenter{
    width: 400px; 
   }
+ 
   .sidenav .normal-link {
    font-size: 18px;
    text-transform: uppercase;
    color: #000000;
+   }
+   .empty{
+     margin-top: 200px;
+   }
+   .btn-exc{
+     width: 85%;
+   }
+   .custom-btn{
+    width: 100%;
    }
    .sidenav .post-article-btn{
     padding: 10px 20px;
@@ -165,6 +176,7 @@
     .grid-card-small{
       margin-left: 10px;
     }
+
   /* #Article ends here*/
 }
 @media screen and (min-width: 769px) {
