@@ -480,6 +480,12 @@ a{
     height: 40px;
     margin-top: 30px;
 }
+.form-gender-holder{
+  margin-top: 15px;
+}
+.form-gender-holder span{
+  padding-right: 10px;
+}
 .row{
   display: flex;
   flex-direction: row;
@@ -575,6 +581,57 @@ a{
   top:0;
   left:0;
   background: url("../img/pswd-icon.png");
+  background-size:50%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  color: #fff;
+  box-sizing: border-box;
+  height: 40px;
+  width: 50px;
+  outline: none;
+}
+.icon-job{
+  position:absolute;
+  display: inline;
+  border: none; 
+  text-align: center;
+  top:0;
+  left:0;
+  background: url("../img/icon-job.png");
+  background-size:50%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  color: #fff;
+  box-sizing: border-box;
+  height: 40px;
+  width: 50px;
+  outline: none;
+}
+.icon-depart{
+  position:absolute;
+  display: inline;
+  border: none; 
+  text-align: center;
+  top:0;
+  left:0;
+  background: url("../img/icon-depart.png");
+  background-size:50%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  color: #fff;
+  box-sizing: border-box;
+  height: 40px;
+  width: 50px;
+  outline: none;
+}
+.icon-address{
+  position:absolute;
+  display: inline;
+  border: none; 
+  text-align: center;
+  top:0;
+  left:0;
+  background: url("../img/icon-address.png");
   background-size:50%;
   background-repeat: no-repeat;
   background-position: 50%;
