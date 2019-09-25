@@ -26,10 +26,17 @@ router.patch('/articles/:articleId',
   isTheOwner,
   articleController.editArticle);
 
+router.delete('/articles/:articleId',
+  isEmployee,
+  isTheOwner,
+  articleController.deleteArticle);
+
 router.post('/articles/:articleId/comments',
   isValidContentType,
   isEmployee,
   isCommentReqValid,
   commentController.commentOnArticle);
+router.get('/feeds',
+  articleController.getAllArticle);
 
 export default router;

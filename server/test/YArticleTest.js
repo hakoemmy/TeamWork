@@ -337,3 +337,18 @@ describe('DELETE api/v1/articles/:articleId article ', () => {
       });
   });
 });
+
+describe('GET api/v1/feeds Get all articles ', () => {
+  it('should return an array of All artiles ', (done) => {
+    chai.request(app)
+      .get('/api/v1/feeds')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.message).to.equal('success');
+        done();
+      });
+  });
+});

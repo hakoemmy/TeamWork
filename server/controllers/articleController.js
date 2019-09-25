@@ -34,6 +34,11 @@ class ArticleController {
       const response = Article.delete(articleId);
       return res.status(REQUEST_SUCCEDED).send(response);
     };
+
+    getAllArticle = (req, res) => {
+      const articleFeeds = Article.getAll();
+      return res.status(REQUEST_SUCCEDED).send(articleFeeds);
+    };
 }
 
 export default ArticleController;
