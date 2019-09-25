@@ -8,6 +8,7 @@ import app from '../index';
 import {
   NOT_FOUND, UNSUPPORTED_CONTENT_TYPE,
   BAD_REQUEST, REQUEST_CONFLICT, RESOURCE_CREATED,
+  UNAUTHORIZED, REQUEST_SUCCEDED,
 } from '../helpers/statusCode';
 
 import user from '../models/fakerData/user';
@@ -161,6 +162,55 @@ describe('POST api/v1/auth/signup creating employee account', () => {
         expect(res.status).to.equal(RESOURCE_CREATED);
         expect(res.body.status).to.equal(RESOURCE_CREATED);
         expect(res.body.message).to.equal('User created successfully');
+        done();
+      });
+  });
+});
+
+describe('POST api/v1/auth/signin email is missing', () => {
+  it('should return email is required', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .set('Accept', 'application/json')
+      .send(user[6])
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(BAD_REQUEST);
+        expect(res.body.status).to.equal(BAD_REQUEST);
+        expect(res.body.error).to.equal('"email" is required');
+        done();
+      });
+  });
+});
+
+
+describe('POST api/v1/auth/signin employee signin success', () => {
+  it('should return user is signed successfully', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .set('Accept', 'application/json')
+      .send(user[7])
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.message).to.equal('User is successfully logged in');
+        done();
+      });
+  });
+});
+
+describe('POST api/v1/auth/signin employee signin failure', () => {
+  it('should return user is not logged in', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .set('Accept', 'application/json')
+      .send(user[8])
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(UNAUTHORIZED);
+        expect(res.body.status).to.equal(UNAUTHORIZED);
+        expect(res.body.error).to.equal('email or password is incorrect!');
         done();
       });
   });

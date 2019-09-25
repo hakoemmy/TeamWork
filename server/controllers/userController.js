@@ -31,6 +31,19 @@ class UserController {
       const user = User.create(singUpPayload);
       return res.status(RESOURCE_CREATED).send(user);
     };
+
+    signIn = (req, res) => {
+      let { email, password } = req.body;
+      let loginPayload = {
+        email: email.trim(),
+        password: password.trim(),
+      };
+      const user = User.login(loginPayload);
+      if (user.status === REQUEST_SUCCEDED) {
+        return res.status(REQUEST_SUCCEDED).send(user);
+      }
+      return res.status(UNAUTHORIZED).send(user);
+    };
 }
 
 export default UserController;
