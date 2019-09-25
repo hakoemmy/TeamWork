@@ -6,6 +6,7 @@ import isValidContentType from '../middleware/isContentTypeValid';
 import {
   isArticleReqValid,
   isTheOwner, isCommentReqValid,
+  isItThere,
 }
   from '../middleware/validator';
 
@@ -38,5 +39,9 @@ router.post('/articles/:articleId/comments',
   commentController.commentOnArticle);
 router.get('/feeds',
   articleController.getAllArticle);
+
+router.get('/articles/:articleId',
+  isItThere,
+  articleController.getSpecificArticle);
 
 export default router;

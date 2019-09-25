@@ -39,6 +39,13 @@ class ArticleController {
       const articleFeeds = Article.getAll();
       return res.status(REQUEST_SUCCEDED).send(articleFeeds);
     };
+
+    getSpecificArticle = (req, res) => {
+      let { articleId } = req.params;
+      articleId = articleId.trim();
+      const article = Article.getArticleById(articleId);
+      return res.status(REQUEST_SUCCEDED).send(article);
+    };
 }
 
 export default ArticleController;

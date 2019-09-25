@@ -48,6 +48,17 @@ class Comment {
 
       return newComment;
     };
+
+    getCommentsByArticleId = (id) => {
+      const { comments } = this;
+      const result = [];
+      for (let item = 0; item < comments.length; item += 1) {
+        if (comments[item].articleId === parseInt(id, 10)) {
+          result.push(comments[item]);
+        }
+      }
+      return result;
+    }
 }
 
 

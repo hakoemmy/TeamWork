@@ -169,10 +169,28 @@ const isCommentReqValid = (req, res, next) => {
   }
   next();
 };
+const isItThere = (req, res, next) => {
+  let { articleId } = req.params;
+  articleId = articleId.trim();
+  if (isNaN(articleId)) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: 'articleId can\'t be a string!',
+    });
+  }
+  if (!Article.isArticleExist(articleId)) {
+    return res.status(NOT_FOUND).send({
+      status: NOT_FOUND,
+      error: 'Such article is not found!',
+    });
+  }
+  next();
+};
 export {
   isSignupReqValid,
   isSigninReqValid,
   isArticleReqValid,
   isTheOwner,
   isCommentReqValid,
+  isItThere,
 };
