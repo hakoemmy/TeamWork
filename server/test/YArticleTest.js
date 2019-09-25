@@ -271,3 +271,69 @@ describe('PATCH api/v1/articles/:articleId article ', () => {
       });
   });
 });
+
+describe('DELETE api/v1/articles/:articleId articleId param', () => {
+  it('should return articleId param can not be a string', (done) => {
+    chai.request(app)
+      .delete('/api/v1/articles/mm')
+      .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(BAD_REQUEST);
+        expect(res.body.status).to.equal(BAD_REQUEST);
+        expect(res.body.error).to.equal('articleId can\'t be a string!');
+        done();
+      });
+  });
+});
+
+
+describe('DELETE api/v1/articles/:articleId articleId param', () => {
+  it('should return articleId param is not found', (done) => {
+    chai.request(app)
+      .delete('/api/v1/articles/900')
+      .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(NOT_FOUND);
+        expect(res.body.status).to.equal(NOT_FOUND);
+        expect(res.body.error).to.equal('Such article is not found!');
+        done();
+      });
+  });
+});
+
+describe('DELETE api/v1/articles/:articleId article ownership', () => {
+  it('should return you are not owner of an article', (done) => {
+    chai.request(app)
+      .delete('/api/v1/articles/1')
+      .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(FORBIDDEN);
+        expect(res.body.status).to.equal(FORBIDDEN);
+        expect(res.body.error).to.equal('Aww snap!.. you are not the owner of an article');
+        done();
+      });
+  });
+});
+
+
+describe('DELETE api/v1/articles/:articleId article ', () => {
+  it('should return article successfully deleted', (done) => {
+    chai.request(app)
+      .delete('/api/v1/articles/1')
+      .set('Accept', 'application/json')
+      .set('x-auth-token', ownerToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.message).to.equal('article successfully deleted');
+        done();
+      });
+  });
+});
