@@ -3,6 +3,7 @@ import bodyParse from 'body-parser';
 import dotenv from 'dotenv';
 import config from './config/default';
 import userRoute from './routes/userRoute';
+import articleRoute from './routes/articleRoute';
 import isContentTypeValid from './middleware/isContentTypeValid';
 import isValidJson from './middleware/isValidJson';
 import { NOT_FOUND } from './helpers/statusCode';
@@ -11,6 +12,7 @@ dotenv.config();
 
 const app = express();
 app.use(bodyParse.json());
+app.use('/api/v1', isValidJson, articleRoute);
 app.use('/api/v1/auth', isContentTypeValid, isValidJson, userRoute);
 
 

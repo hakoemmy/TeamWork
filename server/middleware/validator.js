@@ -86,8 +86,39 @@ const isSigninReqValid = (req, res, next) => {
   }
   next();
 };
+const isArticleReqValid = (req, res, next) => {
+  const schema = {
+    title: Joi.string().required(),
+    article: Joi.string().required(),
+  };
+  const result = Joi.validate(req.body, schema);
+  if (result.error !== null) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: `${result.error.details[0].message}`,
+    });
+  }
+  let { title, article } = req.body;
+  if (!validateData(title)
+        || !validateData(article)
+  ) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: 'title or article can\'t be empty',
+    });
+  }
+  if (!isNaN(title)
+        || !isNaN(article)) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: 'title or article can\'t be a number!',
+    });
+  }
+  next();
+};
 
 export {
   isSignupReqValid,
   isSigninReqValid,
+  isArticleReqValid,
 };

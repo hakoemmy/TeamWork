@@ -93,6 +93,8 @@ class User {
     };
 
     isEmailTaken = email => this.users.find(u => u.email === email);
+
+    isUserExist = userId => this.users.find(u => u.id === parseInt(userId, 10));
 }
 
 export default new User();
