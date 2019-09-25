@@ -27,6 +27,13 @@ class ArticleController {
       const response = Article.edit(trustedPayload, articleId, employeeToken, res);
       return res.status(REQUEST_SUCCEDED).send(response);
     };
+
+    deleteArticle = (req, res) => {
+      let { articleId } = req.params;
+      articleId = articleId.trim();
+      const response = Article.delete(articleId);
+      return res.status(REQUEST_SUCCEDED).send(response);
+    };
 }
 
 export default ArticleController;
