@@ -141,9 +141,38 @@ const isTheOwner = (req, res, next) => {
   }
   next();
 };
+const isCommentReqValid = (req, res, next) => {
+  const schema = {
+    comment: Joi.string().required(),
+  };
+  const result = Joi.validate(req.body, schema);
+  if (result.error !== null) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: `${result.error.details[0].message}`,
+    });
+  }
+  let { comment } = req.body;
+  let { articleId } = req.params;
+  articleId = articleId.trim();
+  if (isNaN(articleId)) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: 'articleId can\'t be a string!',
+    });
+  }
+  if (!validateData(comment)) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: 'comment can\'t be empty',
+    });
+  }
+  next();
+};
 export {
   isSignupReqValid,
   isSigninReqValid,
   isArticleReqValid,
   isTheOwner,
+  isCommentReqValid,
 };
