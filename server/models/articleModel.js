@@ -90,5 +90,15 @@ class Article {
         message: 'article successfully deleted',
       };
     };
+
+    getAll = () => {
+      const articles = this.articles.sort((a, b) => (new Date(b.createdOn)).getTime()
+      - (new Date(a.createdOn)).getTime());
+      return {
+        status: REQUEST_SUCCEDED,
+        message: 'success',
+        data: articles,
+      };
+    }
 }
 export default new Article();
