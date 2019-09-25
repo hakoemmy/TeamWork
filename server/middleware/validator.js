@@ -1,6 +1,8 @@
 import Joi from 'joi';
+import Article from '../models/articleModel';
 import {
-  BAD_REQUEST,
+  BAD_REQUEST, NOT_FOUND,
+  FORBIDDEN,
 } from '../helpers/statusCode';
 
 const validateData = (field) => {
@@ -116,9 +118,32 @@ const isArticleReqValid = (req, res, next) => {
   }
   next();
 };
-
+const isTheOwner = (req, res, next) => {
+  const employeeToken = req.header('x-auth-token').trim();
+  let { articleId } = req.params;
+  if (isNaN(articleId)) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: 'articleId can\'t be a string!',
+    });
+  }
+  if (!Article.isArticleExist(articleId)) {
+    return res.status(NOT_FOUND).send({
+      status: NOT_FOUND,
+      error: 'Such article is not found!',
+    });
+  }
+  if (!Article.isOwnerOfArticle(articleId, employeeToken, res)) {
+    return res.status(FORBIDDEN).send({
+      status: FORBIDDEN,
+      error: 'Aww snap!.. you are not the owner of an article',
+    });
+  }
+  next();
+};
 export {
   isSignupReqValid,
   isSigninReqValid,
   isArticleReqValid,
+  isTheOwner,
 };

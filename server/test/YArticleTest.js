@@ -146,3 +146,128 @@ describe('POST api/v1/articles creating an article with invalid token', () => {
       });
   });
 });
+
+describe('PATCH api/v1/articles/:articleId title is missing', () => {
+  it('should return title is required', (done) => {
+    chai.request(app)
+      .patch('/api/v1/articles/1')
+      .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
+      .send(article[0])
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(BAD_REQUEST);
+        expect(res.body.status).to.equal(BAD_REQUEST);
+        expect(res.body.error).to.equal('"title" is required');
+        done();
+      });
+  });
+});
+
+
+describe('PATCH api/v1/articles/:articleId some fileds in payload are empty', () => {
+  it('should return request has empty fields', (done) => {
+    chai.request(app)
+      .patch('/api/v1/articles/1')
+      .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
+      .send(article[1])
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(BAD_REQUEST);
+        expect(res.body.status).to.equal(BAD_REQUEST);
+        expect(res.body.error).to.equal('title or article can\'t be empty');
+        done();
+      });
+  });
+});
+
+
+describe('PATCH api/v1/articles/:articleId title and article can not be numbers!', () => {
+  it('should return request has some unallowed data', (done) => {
+    chai.request(app)
+      .patch('/api/v1/articles/1')
+      .set('Accept', 'application/json')
+      .send(article[2])
+      .set('x-auth-token', validToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(BAD_REQUEST);
+        expect(res.body.status).to.equal(BAD_REQUEST);
+        expect(res.body.error).to.equal('title or article can\'t be a number!');
+        done();
+      });
+  });
+});
+
+
+describe('PATCH api/v1/articles/:articleId articleId param', () => {
+  it('should return articleId param can not be a string', (done) => {
+    chai.request(app)
+      .patch('/api/v1/articles/mm')
+      .set('Accept', 'application/json')
+      .send(article[3])
+      .set('x-auth-token', validToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(BAD_REQUEST);
+        expect(res.body.status).to.equal(BAD_REQUEST);
+        expect(res.body.error).to.equal('articleId can\'t be a string!');
+        done();
+      });
+  });
+});
+
+
+describe('PATCH api/v1/articles/:articleId articleId param', () => {
+  it('should return articleId param is not found', (done) => {
+    chai.request(app)
+      .patch('/api/v1/articles/900')
+      .set('Accept', 'application/json')
+      .send(article[3])
+      .set('x-auth-token', validToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(NOT_FOUND);
+        expect(res.body.status).to.equal(NOT_FOUND);
+        expect(res.body.error).to.equal('Such article is not found!');
+        done();
+      });
+  });
+});
+
+
+describe('PATCH api/v1/articles/:articleId article ownership', () => {
+  it('should return you are not owner of an article', (done) => {
+    chai.request(app)
+      .patch('/api/v1/articles/1')
+      .set('Accept', 'application/json')
+      .send(article[3])
+      .set('x-auth-token', validToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(FORBIDDEN);
+        expect(res.body.status).to.equal(FORBIDDEN);
+        expect(res.body.error).to.equal('Aww snap!.. you are not the owner of an article');
+        done();
+      });
+  });
+});
+
+
+describe('PATCH api/v1/articles/:articleId article ', () => {
+  it('should return article successfully edited', (done) => {
+    chai.request(app)
+      .patch('/api/v1/articles/1')
+      .set('Accept', 'application/json')
+      .send(article[3])
+      .set('x-auth-token', ownerToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.message).to.equal('article successfully edited');
+        done();
+      });
+  });
+});
