@@ -24,4 +24,9 @@ router.patch('/articles/:articleId',
   isTheOwner,
   articleController.editArticle);
 
+router.delete('/articles/:articleId',
+  isEmployee,
+  isTheOwner,
+  articleController.deleteArticle);
+
 export default router;

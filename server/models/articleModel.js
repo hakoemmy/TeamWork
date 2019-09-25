@@ -80,5 +80,15 @@ class Article {
       };
       return editedArticle;
     };
+
+    delete = (articleId) => {
+      const article = this.articles.find(a => a.id === parseInt(articleId, 10));
+      const index = this.articles.indexOf(article);
+      this.articles.splice(index, 1);
+      return {
+        status: REQUEST_SUCCEDED,
+        message: 'article successfully deleted',
+      };
+    };
 }
 export default new Article();
