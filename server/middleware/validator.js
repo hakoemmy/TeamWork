@@ -72,8 +72,22 @@ const isSignupReqValid = (req, res, next) => {
   }
   next();
 };
-
+const isSigninReqValid = (req, res, next) => {
+  const schema = {
+    email: Joi.string().email().required(),
+    password: Joi.required(),
+  };
+  const result = Joi.validate(req.body, schema);
+  if (result.error !== null) {
+    return res.status(BAD_REQUEST).send({
+      status: BAD_REQUEST,
+      error: `${result.error.details[0].message}`,
+    });
+  }
+  next();
+};
 
 export {
   isSignupReqValid,
+  isSigninReqValid,
 };
