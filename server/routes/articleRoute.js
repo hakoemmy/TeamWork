@@ -1,15 +1,17 @@
 import express from 'express';
 import ArticleController from '../controllers/articleController';
+import CommentController from '../controllers/commentController';
 import isEmployee from '../middleware/isEmployee';
 import isValidContentType from '../middleware/isContentTypeValid';
 import {
   isArticleReqValid,
-  isTheOwner,
+  isTheOwner, isCommentReqValid,
 }
   from '../middleware/validator';
 
 const router = express.Router();
 const articleController = new ArticleController();
+const commentController = new CommentController();
 
 router.post('/articles',
   isValidContentType,
@@ -24,9 +26,10 @@ router.patch('/articles/:articleId',
   isTheOwner,
   articleController.editArticle);
 
-router.delete('/articles/:articleId',
+router.post('/articles/:articleId/comments',
+  isValidContentType,
   isEmployee,
-  isTheOwner,
-  articleController.deleteArticle);
+  isCommentReqValid,
+  commentController.commentOnArticle);
 
 export default router;
