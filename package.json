@@ -13,6 +13,13 @@
   "author": "H.Emmanuel",
   "license": "MIT",
   "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.6.2",
     "@hapi/joi": "^15.1.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
@@ -33,12 +40,7 @@
     "node-datetime": "^2.1.2",
     "nyc": "^14.1.1",
     "swagger-ui-dist": "^3.23.1",
-    "swagger-ui-express": "^4.0.7",
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/node": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.5.5"
+    "swagger-ui-express": "^4.0.7"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
@@ -57,8 +59,4 @@
     "url": "https://github.com/hakoemmy/TeamWork/issues"
   },
   "homepage": "https://github.com/hakoemmy/TeamWork#readme"
-
-
-
-  
 }
