@@ -352,3 +352,48 @@ describe('GET api/v1/feeds Get all articles ', () => {
       });
   });
 });
+
+describe('GET api/v1/articles/:articleId articleId param', () => {
+  it('should return articleId param can not be a string', (done) => {
+    chai.request(app)
+      .get('/api/v1/articles/mm')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(BAD_REQUEST);
+        expect(res.body.status).to.equal(BAD_REQUEST);
+        expect(res.body.error).to.equal('articleId can\'t be a string!');
+        done();
+      });
+  });
+});
+
+describe('GET api/v1/articles/:articleId articleId param', () => {
+  it('should return articleId param is not found', (done) => {
+    chai.request(app)
+      .get('/api/v1/articles/900')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(NOT_FOUND);
+        expect(res.body.status).to.equal(NOT_FOUND);
+        expect(res.body.error).to.equal('Such article is not found!');
+        done();
+      });
+  });
+});
+
+
+describe('GET api/v1/articles/:articleId Get article by Id', () => {
+  it('should return acertain article', (done) => {
+    chai.request(app)
+      .get('/api/v1/articles/2')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.status).to.equal(REQUEST_SUCCEDED);
+        done();
+      });
+  });
+});

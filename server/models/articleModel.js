@@ -1,5 +1,6 @@
 import lodash from 'lodash';
 import datetime from 'node-datetime';
+import Comment from './commentModel';
 import { RESOURCE_CREATED, REQUEST_SUCCEDED } from '../helpers/statusCode';
 import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
 
@@ -98,6 +99,33 @@ class Article {
         status: REQUEST_SUCCEDED,
         message: 'success',
         data: articles,
+      };
+    };
+
+    getArticleById = (articleId) => {
+      const foundArticle = this.articles.find(a => a.id === parseInt(articleId, 10));
+      let {
+        id,
+        authorId,
+        title,
+        article,
+        createdOn,
+        updatedOn,
+      } = foundArticle;
+      let response = {
+        id,
+        authorId,
+        title,
+        article,
+        createdOn,
+        updatedOn,
+        comments: Comment.getCommentsByArticleId(id),
+
+      };
+      return {
+        status: REQUEST_SUCCEDED,
+        message: 'success',
+        data: response,
       };
     }
 }
