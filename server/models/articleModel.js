@@ -51,5 +51,34 @@ class Article {
 
       return newArticle;
     };
+
+    isArticleExist = articleId => this.articles.find(a => a.id === parseInt(articleId, 10));
+
+    isOwnerOfArticle = (articleId, token, res) => {
+      const employeeId = grabEmployeeIdFromToken(token, res);
+      const article = this.articles.find(
+        a => a.id === parseInt(articleId, 10)
+       && a.authorId === employeeId,
+      );
+      return article;
+    };
+
+    edit = (payload, articleId, token, res) => {
+      let article = this.articles.find(a => a.id === parseInt(articleId, 10));
+      article.title = payload.title;
+      article.article = payload.article;
+      article.authorId = grabEmployeeIdFromToken(token, res);
+      article.createdOn = article.createdOn;
+      article.updatedOn = this.currentDate;
+
+      let editedArticle = {
+        status: REQUEST_SUCCEDED,
+        message: 'article successfully edited',
+        data: lodash.pick(article, ['id',
+          'authorId', 'title', 'createdOn', 'updatedOn',
+        ]),
+      };
+      return editedArticle;
+    };
 }
 export default new Article();
