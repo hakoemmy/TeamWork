@@ -859,6 +859,9 @@ cursor: pointer;
 .custom-margin{
   margin:10px;
 }
+.closeDialog{
+  float: right;
+}
 /*Load more feeds*/
 #load-more-container{
   text-align: center;
@@ -877,3 +880,72 @@ cursor: pointer;
   padding-top: 10px;
 }
 /* How it works page */
+
+
+/* CSS media queries */
+/*  */
+@media screen and (max-width: 3800px) {
+  
+  #navbar .location-input-container{
+    width: 200px;
+  }
+  .grid-fixer, #showcase{
+    width: 100%;
+  }
+  .right h1{
+    padding-right: 40px;
+  }
+  .trends{
+    width: 20%;
+  }
+}
+@media screen and (width: 1024px){
+  .btn-exc{
+    width: 200px;
+  }
+  .trends{
+    display: none;
+  }
+  #other-posts{
+   display: none;
+ }
+  
+ .grid-card{
+  width: 100%;
+ }
+ .recent-articles{
+   margin-left: 10px;
+   margin-right: 40px;
+ }
+ #my-articles{
+   margin-right: 300px;
+ }
+}
+@media screen and (width: 1440px){
+  .btn-exc{
+    width: 200px;
+  }
+  .trends{
+    display: none;
+  }
+  #other-posts{
+   display: none;
+ }
+  
+ .grid-card{
+  width: 100%;
+ }
+ .recent-articles{
+   margin-left: 10px;
+   margin-right: 40px;
+ }
+ #my-articles{
+  margin-right: 500px;
+}
+}
+@media screen and (width: 2560px){
+  .btn-exc{
+    width: 200px;
+  }
+  
+}

@@ -7,9 +7,10 @@ const closeNav = () => {
 };
 // Tabbed comment panel
 const openTab = (evt, tabName) => {
- const element = document.querySelector('.empty');
- if(element !=undefined){
-  element.style.margin = '0px';
+ const element1 = document.querySelector('.empty');
+ const titleElement = document.querySelector('.custom-input');
+ if(element1 !=undefined){
+  element1.style.margin = '0px';
  }
   
   if(tabName === 'preview'){
@@ -52,3 +53,4 @@ const shareArticle = () => {
 const closeShareArticle = () => {
   document.querySelector('.modal-view').style.display = 'none';
 };
+
