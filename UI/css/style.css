@@ -23,7 +23,9 @@
     grid-gap: 30px;
     float: right;
 }
-
+#write{
+  display: block;
+}
 .recent-articles{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -751,7 +753,9 @@ a{
 .tab button.active {
   background-color: #1841533f;
 }
-
+.toggle-editor{
+  display: block;
+}
 /* Style the tab content */
 .tabcontent {
   display: none;
@@ -775,6 +779,7 @@ a{
 .commenter-post{
   border: 1px solid #717f869a;
   border-radius:0px 0px 5px 5px;
+  border-bottom: none;
   padding: 10px;
   -webkit-border-radius:0px 0px 5px 5px;
   -moz-border-radius:0px 0px 5px 5px;
@@ -784,6 +789,15 @@ a{
 .border{
   text-align: center;
   border: 1px solid #717f869a;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.border-tail{
+  border: 1px solid #717f869a;
+  border-top: none;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -903,45 +917,36 @@ cursor: pointer;
   .btn-exc{
     width: 200px;
   }
-  .trends{
-    display: none;
-  }
-  #other-posts{
+  /* #other-posts{
    display: none;
- }
-  
- .grid-card{
-  width: 100%;
- }
+ } */
  .recent-articles{
    margin-left: 10px;
    margin-right: 40px;
  }
- #my-articles{
-   margin-right: 300px;
+ .trends{
+   display: none;
  }
+
 }
 @media screen and (width: 1440px){
   .btn-exc{
     width: 200px;
   }
-  .trends{
-    display: none;
-  }
-  #other-posts{
+  /* #other-posts{
    display: none;
- }
-  
+ } */
  .grid-card{
-  width: 100%;
- }
+  width: 500px;
+}
+ 
  .recent-articles{
    margin-left: 10px;
    margin-right: 40px;
  }
- #my-articles{
-  margin-right: 500px;
-}
+ /* #my-articles{
+  margin-right: 400px;
+} */
 }
 @media screen and (width: 2560px){
   .btn-exc{
@@ -949,3 +954,4 @@ cursor: pointer;
   }
   
 }
+
