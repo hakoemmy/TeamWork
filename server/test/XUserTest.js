@@ -4,6 +4,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 
 import app from '../index';
+import UserModel from '../models/userModel';
 
 import {
   NOT_FOUND, UNSUPPORTED_CONTENT_TYPE,
@@ -16,6 +17,18 @@ import user from '../models/fakerData/user';
 const { expect } = chai;
 
 chai.use(chaiHttp);
+
+UserModel.users.push({
+  id: 1,
+  firstName: 'TUYISENGE',
+  lastName: 'Sylvain',
+  email: 'sylvain@gmail.com',
+  password: '$2b$10$nhZCvSMTdKg/MI7gVTWwj.WCeq7tTSpr4xj4xzVmIbdCoHnwj9nwy',
+  gender: 'Male',
+  jobRole: 'Web developer',
+  department: 'IT',
+  address: 'Kigali,Rwanda',
+});
 
 describe('POST api/v1/auth/signup when no valid URL endpoint exist', () => {
   it('should return such Uri does not exist on our server', (done) => {

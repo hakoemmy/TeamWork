@@ -10,19 +10,7 @@ import comparePassword from '../helpers/passwordMatcher';
 
 class User {
   constructor() {
-    this.users = [
-      {
-        id: 1,
-        firstName: 'TUYISENGE',
-        lastName: 'Sylvain',
-        email: 'sylvain@gmail.com',
-        password: '$2b$10$nhZCvSMTdKg/MI7gVTWwj.WCeq7tTSpr4xj4xzVmIbdCoHnwj9nwy',
-        gender: 'Male',
-        jobRole: 'Web developer',
-        department: 'IT',
-        address: 'Kigali,Rwanda',
-      },
-    ];
+    this.users = [];
   }
 
     create = (payload) => {

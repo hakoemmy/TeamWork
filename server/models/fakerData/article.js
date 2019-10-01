@@ -1,20 +1,19 @@
-import faker from 'faker';
 
 const articles = [
   {
-    article: faker.lorem.paragraphs(),
+    article: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
   },
   {
     title: ' ',
-    article: faker.lorem.paragraphs(),
+    article: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout',
   },
   {
     title: '89977789',
-    article: faker.lorem.paragraphs(),
+    article: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC,',
   },
   {
-    title: faker.lorem.sentence(),
-    article: faker.lorem.paragraphs(),
+    title: 'Where can I get some?',
+    article: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form',
   },
 ];
 

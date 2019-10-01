@@ -1,4 +1,4 @@
-import faker from 'faker';
+
 
 const comments = [
   {},
@@ -6,7 +6,7 @@ const comments = [
     comment: '   ',
   },
   {
-    comment: faker.lorem.paragraph(),
+    comment: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested',
   },
 ];
 

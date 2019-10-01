@@ -3,7 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 
 import app from '../index';
-
+import ArticleModel from '../models/articleModel';
 import {
   NOT_FOUND,
   BAD_REQUEST, RESOURCE_CREATED,
@@ -17,6 +17,22 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
+ArticleModel.articles.push({
+  id: 1,
+  authorId: 2,
+  title: 'My journey in software development industry',
+  article: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+  createdOn: '09/03/2019 12:04:59',
+  updatedOn: '09/03/2019 12:04:59',
+},
+{
+  id: 2,
+  authorId: 2,
+  title: 'My journey in software development industry',
+  article: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+  createdOn: '09/03/2019 12:04:59',
+  updatedOn: '09/03/2019 12:04:59',
+});
 const validToken = generateAuthToken(1);
 const ownerToken = generateAuthToken(2);
 const noToken = ' ';

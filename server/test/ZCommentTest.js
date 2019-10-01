@@ -3,6 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 
 import app from '../index';
+import CommentModel from '../models/commentModel';
 
 import {
   NOT_FOUND,
@@ -15,6 +16,17 @@ import generateAuthToken from '../helpers/tokenEncoder';
 const { expect } = chai;
 
 chai.use(chaiHttp);
+
+CommentModel.comments.push(
+  {
+    id: 1,
+    authorId: 2,
+    articleId: 1,
+    comment: 'Informative One!',
+    createdOn: '09/03/2019 12:04:59',
+    updatedOn: '09/03/2019 12:04:59',
+  },
+);
 
 const validToken = generateAuthToken(1);
 
