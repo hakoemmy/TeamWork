@@ -1,6 +1,6 @@
 import chai from 'chai';
-
 import chaiHttp from 'chai-http';
+import dotenv from 'dotenv';
 
 import app from '../index';
 import ArticleModel from '../models/articleModel';
@@ -14,8 +14,8 @@ import article from '../models/fakerData/article';
 import generateAuthToken from '../helpers/tokenEncoder';
 
 const { expect } = chai;
-
 chai.use(chaiHttp);
+dotenv.config();
 
 ArticleModel.articles.push({
   id: 1,
@@ -37,9 +37,6 @@ const validToken = generateAuthToken(1);
 const ownerToken = generateAuthToken(2);
 const noToken = ' ';
 const noUserWithToken = generateAuthToken(89);
-
-
-const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5mcCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTY3ODU2NTczfQ.WqwWVxxt9J8EN03toJM7K1QQBbTCJKe3lV-32axH';
 
 describe('POST api/v1/articles title is missing', () => {
   it('should return title is required', (done) => {
@@ -117,7 +114,7 @@ describe('POST api/v1/articles creating an article with Invalid token', () => {
       .post('/api/v1/articles')
       .set('Accept', 'application/json')
       .send(article[3])
-      .set('x-auth-token', invalidToken)
+      .set('x-auth-token', process.env.INVALID_TOKEN)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(BAD_REQUEST);

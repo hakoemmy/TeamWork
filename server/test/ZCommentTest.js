@@ -1,6 +1,6 @@
 import chai from 'chai';
-
 import chaiHttp from 'chai-http';
+import dotenv from 'dotenv';
 
 import app from '../index';
 import CommentModel from '../models/commentModel';
@@ -16,7 +16,7 @@ import generateAuthToken from '../helpers/tokenEncoder';
 const { expect } = chai;
 
 chai.use(chaiHttp);
-
+dotenv.config();
 CommentModel.comments.push(
   {
     id: 1,
@@ -30,14 +30,12 @@ CommentModel.comments.push(
 
 const validToken = generateAuthToken(1);
 
-const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTY3ODU2NTczfQ.WqwWVxxt9J8EN03toJM7K1QQBbTCJKe3lV-32axH';
-
 describe('POST api/v1/articles/:articleId with Invalid signature token', () => {
   it('should return Invalid token', (done) => {
     chai.request(app)
       .post('/api/v1/articles/2/comments')
       .set('Accept', 'application/json')
-      .set('x-auth-token', invalidToken)
+      .set('x-auth-token', process.env.INVALID_TOKEN)
       .send(comment[2])
       .end((err, res) => {
         expect(res.body).to.be.an('object');
