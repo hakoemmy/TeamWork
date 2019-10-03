@@ -1,4 +1,5 @@
 import chai from 'chai';
+
 import chaiHttp from 'chai-http';
 import dotenv from 'dotenv';
 
@@ -14,6 +15,7 @@ import article from '../models/fakerData/article';
 import generateAuthToken from '../helpers/tokenEncoder';
 
 const { expect } = chai;
+
 chai.use(chaiHttp);
 dotenv.config();
 
@@ -37,6 +39,7 @@ const validToken = generateAuthToken(1);
 const ownerToken = generateAuthToken(2);
 const noToken = ' ';
 const noUserWithToken = generateAuthToken(89);
+
 
 describe('POST api/v1/articles title is missing', () => {
   it('should return title is required', (done) => {
@@ -152,8 +155,8 @@ describe('POST api/v1/articles creating an article with invalid token', () => {
       .set('x-auth-token', noUserWithToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(NOT_FOUND);
-        expect(res.body.status).to.equal(NOT_FOUND);
+        expect(res.status).to.equal(UNAUTHORIZED);
+        expect(res.body.status).to.equal(UNAUTHORIZED);
         expect(res.body.error).to.equal('Awww, Snap!..Such kind of access token does not match any employee!');
         done();
       });
@@ -356,6 +359,7 @@ describe('GET api/v1/feeds Get all articles ', () => {
     chai.request(app)
       .get('/api/v1/feeds')
       .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(REQUEST_SUCCEDED);
@@ -371,6 +375,7 @@ describe('GET api/v1/articles/:articleId articleId param', () => {
     chai.request(app)
       .get('/api/v1/articles/mm')
       .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(BAD_REQUEST);
@@ -386,6 +391,7 @@ describe('GET api/v1/articles/:articleId articleId param', () => {
     chai.request(app)
       .get('/api/v1/articles/900')
       .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(NOT_FOUND);
@@ -402,6 +408,7 @@ describe('GET api/v1/articles/:articleId Get article by Id', () => {
     chai.request(app)
       .get('/api/v1/articles/2')
       .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(REQUEST_SUCCEDED);

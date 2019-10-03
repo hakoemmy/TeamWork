@@ -20,8 +20,8 @@ const isEmployee = (req, res, next) => {
   try {
     const { id } = jwt.verify(token, process.env.JWTSECRET);
     if (!User.isUserExist(id)) {
-      return res.status(NOT_FOUND).send({
-        status: NOT_FOUND,
+      return res.status(UNAUTHORIZED).send({
+        status: UNAUTHORIZED,
         error: 'Awww, Snap!..Such kind of access token does not match any employee!',
       });
     }
