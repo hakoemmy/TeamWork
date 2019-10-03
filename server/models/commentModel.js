@@ -6,16 +6,7 @@ import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
 class Comment {
   constructor() {
     this.currentDate = datetime.create().format('m/d/Y H:M:S');
-    this.comments = [
-      {
-        id: 1,
-        authorId: 2,
-        articleId: 1,
-        comment: 'Informative One!',
-        createdOn: '09/03/2019 12:04:59',
-        updatedOn: '09/03/2019 12:04:59',
-      },
-    ];
+    this.comments = [];
   }
 
     post = (payload, articleId, token, res) => {

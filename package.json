@@ -30,7 +30,6 @@
     "eslint-config-airbnb": "^17.1.1",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "faker": "^4.1.0",
     "helmet": "^3.20.0",
     "joi": "^14.3.1",
     "js-yaml": "^3.13.1",

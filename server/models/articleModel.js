@@ -8,24 +8,7 @@ import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
 class Article {
   constructor() {
     this.currentDate = datetime.create().format('m/d/Y H:M:S');
-    this.articles = [
-      {
-        id: 1,
-        authorId: 2,
-        title: 'My journey in software development industry',
-        article: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-        createdOn: '09/03/2019 12:04:59',
-        updatedOn: '09/03/2019 12:04:59',
-      },
-      {
-        id: 2,
-        authorId: 2,
-        title: 'My journey in software development industry',
-        article: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-        createdOn: '09/03/2019 12:04:59',
-        updatedOn: '09/03/2019 12:04:59',
-      },
-    ];
+    this.articles = [];
   }
 
     create = (payload, token, res) => {
