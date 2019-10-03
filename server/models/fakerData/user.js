@@ -10,7 +10,7 @@ const users = [
     address: 'Kigali, Rwanda',
   },
   {
-    firstName: ' ',
+    firstName: '        ',
     lastName: 'John',
     email: 'john@gmail.com',
     password: 'hjgfsdbvm',

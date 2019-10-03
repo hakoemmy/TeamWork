@@ -38,9 +38,11 @@ router.post('/articles/:articleId/comments',
   isCommentReqValid,
   commentController.commentOnArticle);
 router.get('/feeds',
+  isEmployee,
   articleController.getAllArticle);
 
 router.get('/articles/:articleId',
+  isEmployee,
   isItThere,
   articleController.getSpecificArticle);
 

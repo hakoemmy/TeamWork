@@ -83,6 +83,13 @@ class User {
     isEmailTaken = email => this.users.find(u => u.email === email);
 
     isUserExist = userId => this.users.find(u => u.id === parseInt(userId, 10));
+
+    grabUserDetails = (userId) => {
+      const user = this.users.find(u => u.id === parseInt(userId, 10));
+      return lodash.pick(user, ['id',
+        'firstName', 'lastName', 'email',
+        'address', 'jobRole', 'ogender', 'department']);
+    };
 }
 
 export default new User();

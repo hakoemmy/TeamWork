@@ -1,6 +1,6 @@
-import lodash from 'lodash';
 import datetime from 'node-datetime';
 import Comment from './commentModel';
+import User from './userModel';
 import { RESOURCE_CREATED, REQUEST_SUCCEDED } from '../helpers/statusCode';
 import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
 
@@ -15,22 +15,29 @@ class Article {
       const {
         title, article,
       } = payload;
-      const currentId = this.articles.length + 1;
+      const id = this.articles.length + 1;
+      const authorId = grabEmployeeIdFromToken(token, res);
+      const createdOn = this.currentDate;
       let newArticle = {
-        id: currentId,
-        authorId: grabEmployeeIdFromToken(token, res),
+        id,
+        authorId,
         title,
         article,
         createdOn: this.currentDate,
         updatedOn: this.currentDate,
       };
       this.articles.push(newArticle);
+      let response = {
+        id,
+        author: User.grabUserDetails(authorId),
+        title,
+        article,
+        createdOn,
+      };
       newArticle = {
         status: RESOURCE_CREATED,
         message: 'article successfully created',
-        data: lodash.pick(newArticle, ['id',
-          'authorId', 'title', 'createdOn',
-        ]),
+        data: response,
       };
 
       return newArticle;
@@ -48,20 +55,30 @@ class Article {
     };
 
     edit = (payload, articleId, token, res) => {
-      let article = this.articles.find(a => a.id === parseInt(articleId, 10));
-      article.title = payload.title;
-      article.article = payload.article;
-      article.authorId = grabEmployeeIdFromToken(token, res);
-      article.createdOn = article.createdOn;
-      article.updatedOn = this.currentDate;
-
-      let editedArticle = {
+      let articleObj = this.articles.find(a => a.id === parseInt(articleId, 10));
+      articleObj.title = payload.title;
+      articleObj.article = payload.article;
+      articleObj.authorId = grabEmployeeIdFromToken(token, res);
+      articleObj.createdOn = articleObj.createdOn;
+      articleObj.updatedOn = this.currentDate;
+      const {
+        id, title, article,
+        authorId, createdOn, updatedOn,
+      } = articleObj;
+      const response = {
+        id,
+        author: User.grabUserDetails(authorId),
+        title,
+        article,
+        createdOn,
+        updatedOn,
+      };
+      const editedArticle = {
         status: REQUEST_SUCCEDED,
         message: 'article successfully edited',
-        data: lodash.pick(article, ['id',
-          'authorId', 'title', 'createdOn', 'updatedOn',
-        ]),
+        data: response,
       };
+
       return editedArticle;
     };
 
@@ -78,10 +95,27 @@ class Article {
     getAll = () => {
       const articles = this.articles.sort((a, b) => (new Date(b.createdOn)).getTime()
       - (new Date(a.createdOn)).getTime());
+      let response = [];
+      for (let item = 0; item < articles.length; item += 1) {
+        const {
+          id, authorId, title,
+          article, createdOn, updatedOn,
+        } = articles[item];
+        const subObj = {
+          id,
+          author: User.grabUserDetails(authorId),
+          title,
+          article,
+          createdOn,
+          updatedOn,
+        };
+        response.push(subObj);
+      }
+
       return {
         status: REQUEST_SUCCEDED,
         message: 'success',
-        data: articles,
+        data: response,
       };
     };
 
@@ -97,7 +131,7 @@ class Article {
       } = foundArticle;
       let response = {
         id,
-        authorId,
+        author: User.grabUserDetails(authorId),
         title,
         article,
         createdOn,

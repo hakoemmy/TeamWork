@@ -1,6 +1,7 @@
 import datetime from 'node-datetime';
 import { RESOURCE_CREATED } from '../helpers/statusCode';
 import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
+import User from './userModel';
 
 
 class Comment {
@@ -13,10 +14,11 @@ class Comment {
       const {
         comment,
       } = payload;
-      const currentId = this.comments.length + 1;
+      const id = this.comments.length + 1;
+      const authorId = grabEmployeeIdFromToken(token, res);
       let newComment = {
-        id: currentId,
-        authorId: grabEmployeeIdFromToken(token, res),
+        id,
+        authorId,
         articleId: parseInt(articleId, 10),
         comment,
         createdOn: this.currentDate,
@@ -24,8 +26,8 @@ class Comment {
       };
       this.comments.push(newComment);
       let response = {
-        id: currentId,
-        authorId: grabEmployeeIdFromToken(token, res),
+        id,
+        author: User.grabUserDetails(authorId),
         articleId: parseInt(articleId, 10),
         comment,
         createdOn: this.currentDate,

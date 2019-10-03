@@ -22,8 +22,8 @@ const isGenderValid = (gender) => {
 
 const isSignupReqValid = (req, res, next) => {
   const schema = {
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
+    firstName: Joi.string().min(4).required(),
+    lastName: Joi.string().min(4).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
     address: Joi.string().required(),
