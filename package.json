@@ -8,7 +8,8 @@
     "start": " babel-node ./server/index.js",
     "dev-start": " nodemon --exec babel-node ./server/index.js",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "showCoverage": "start coverage/server/index.html"
+    "showCoverage": "start coverage/server/index.html",
+    "queries": "babel-node ./server/models/entityQueries.js createTables"
   },
   "author": "H.Emmanuel",
   "license": "MIT",
@@ -28,9 +29,7 @@
     "config": "^3.2.2",
     "dotenv": "^8.0.0",
     "eslint-config-airbnb": "^17.1.1",
-    "esm": "^3.2.25",
     "express": "^4.17.1",
-    "helmet": "^3.20.0",
     "joi": "^14.3.1",
     "js-yaml": "^3.13.1",
     "jsonwebtoken": "^8.5.1",
@@ -38,6 +37,7 @@
     "mocha": "^6.2.0",
     "node-datetime": "^2.1.2",
     "nyc": "^14.1.1",
+    "pg": "^7.12.1",
     "swagger-ui-dist": "^3.23.1",
     "swagger-ui-express": "^4.0.7"
   },
