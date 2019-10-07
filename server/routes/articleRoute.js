@@ -19,31 +19,4 @@ router.post('/articles',
   isEmployee,
   isArticleReqValid,
   createArticle);
-
-// router.patch('/articles/:articleId',
-//   isValidContentType,
-//   isEmployee,
-//   isArticleReqValid,
-//   isTheOwner,
-//   articleController.editArticle);
-
-// router.delete('/articles/:articleId',
-//   isEmployee,
-//   isTheOwner,
-//   articleController.deleteArticle);
-
-// router.post('/articles/:articleId/comments',
-//   isValidContentType,
-//   isEmployee,
-//   isCommentReqValid,
-//   commentController.commentOnArticle);
-// router.get('/feeds',
-//   isEmployee,
-//   articleController.getAllArticle);
-
-// router.get('/articles/:articleId',
-//   isEmployee,
-//   isItThere,
-//   articleController.getSpecificArticle);
-
 export default router;
