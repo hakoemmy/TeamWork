@@ -1,14 +1,14 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import User from '../models/userModel';
+import Entity from '../models/crudQueries';
 import {
-  UNAUTHORIZED, NOT_FOUND,
+  UNAUTHORIZED,
   BAD_REQUEST,
 } from '../helpers/statusCode';
 
 dotenv.config();
-
-const isEmployee = (req, res, next) => {
+const userModel = new Entity('users');
+const isEmployee = async (req, res, next) => {
   const token = req.header('x-auth-token');
   if (!token) {
     return res.status(UNAUTHORIZED).send({
@@ -19,7 +19,8 @@ const isEmployee = (req, res, next) => {
 
   try {
     const { id } = jwt.verify(token, process.env.JWTSECRET);
-    if (!User.isUserExist(id)) {
+    const user = await userModel.select('*', 'id=$1', [id]);
+    if (!user.length) {
       return res.status(UNAUTHORIZED).send({
         status: UNAUTHORIZED,
         error: 'Awww, Snap!..Such kind of access token does not match any employee!',

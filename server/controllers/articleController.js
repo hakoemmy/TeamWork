@@ -1,17 +1,39 @@
+import datetime from 'node-datetime';
+import Entity from '../models/crudQueries';
 import Article from '../models/articleModel';
+import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
 import {
-  RESOURCE_CREATED, REQUEST_SUCCEDED,
+  RESOURCE_CREATED, REQUEST_SUCCEDED, SERVER_ERROR,
 } from '../helpers/statusCode';
 
+
 class ArticleController {
-    createArticle = (req, res) => {
-      let { title, article } = req.body;
-      let postPayload = {
-        title: title.trim(),
-        article: article.trim(),
-      };
-      const response = Article.create(postPayload, req.header('x-auth-token'), res);
-      return res.status(RESOURCE_CREATED).send(response);
+  static articleModel() {
+    return new Entity('articles');
+  }
+
+    static createArticle = async (req, res) => {
+      try {
+        let { title, article } = req.body;
+        let token = req.header('x-auth-token');
+        const authorId = grabEmployeeIdFromToken(token, res);
+        const currentDate = datetime.create().format('m/d/Y H:M:S');
+        const attributes = 'authorid,title,article,created_on,updated_on';
+        const selectors = `'${authorId}', '${title}', '${article}', '${currentDate}', '${currentDate}'`;
+        const createdArticle = await this.articleModel().insert(attributes, selectors);
+
+        return res.status(RESOURCE_CREATED).json({
+          status: RESOURCE_CREATED,
+          message: 'article successfully created',
+          data: createdArticle,
+        });
+      } catch (e) {
+        console.log(e);
+        return res.status(SERVER_ERROR).json({
+          status: SERVER_ERROR,
+          error: 'OOps, Internal server error occured.',
+        });
+      }
     };
 
     editArticle = (req, res) => {

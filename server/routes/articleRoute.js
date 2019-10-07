@@ -11,39 +11,39 @@ import {
   from '../middleware/validator';
 
 const router = express.Router();
-const articleController = new ArticleController();
-const commentController = new CommentController();
+const { createArticle } = ArticleController;
+
 
 router.post('/articles',
   isValidContentType,
   isEmployee,
   isArticleReqValid,
-  articleController.createArticle);
+  createArticle);
 
-router.patch('/articles/:articleId',
-  isValidContentType,
-  isEmployee,
-  isArticleReqValid,
-  isTheOwner,
-  articleController.editArticle);
+// router.patch('/articles/:articleId',
+//   isValidContentType,
+//   isEmployee,
+//   isArticleReqValid,
+//   isTheOwner,
+//   articleController.editArticle);
 
-router.delete('/articles/:articleId',
-  isEmployee,
-  isTheOwner,
-  articleController.deleteArticle);
+// router.delete('/articles/:articleId',
+//   isEmployee,
+//   isTheOwner,
+//   articleController.deleteArticle);
 
-router.post('/articles/:articleId/comments',
-  isValidContentType,
-  isEmployee,
-  isCommentReqValid,
-  commentController.commentOnArticle);
-router.get('/feeds',
-  isEmployee,
-  articleController.getAllArticle);
+// router.post('/articles/:articleId/comments',
+//   isValidContentType,
+//   isEmployee,
+//   isCommentReqValid,
+//   commentController.commentOnArticle);
+// router.get('/feeds',
+//   isEmployee,
+//   articleController.getAllArticle);
 
-router.get('/articles/:articleId',
-  isEmployee,
-  isItThere,
-  articleController.getSpecificArticle);
+// router.get('/articles/:articleId',
+//   isEmployee,
+//   isItThere,
+//   articleController.getSpecificArticle);
 
 export default router;
