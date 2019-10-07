@@ -11,7 +11,7 @@ import {
   from '../middleware/validator';
 
 const router = express.Router();
-const { createArticle } = ArticleController;
+const { createArticle, getMyArticle } = ArticleController;
 
 
 router.post('/articles',
@@ -19,4 +19,7 @@ router.post('/articles',
   isEmployee,
   isArticleReqValid,
   createArticle);
+router.get('/articles',
+  isEmployee,
+  getMyArticle);
 export default router;

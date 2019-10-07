@@ -29,6 +29,18 @@ class ArticleController {
       }
     };
 
+    static getMyArticle = async (req, res) => {
+      try {
+        const token = req.header('x-auth-token');
+        const authorId = grabEmployeeIdFromToken(token, res);
+        const articles = await this.articleModel().select('*', 'authorid=$1', [authorId]);
+        return ResponseHandler.success(REQUEST_SUCCEDED, 'Your articles returned successfully', articles, res);
+      } catch (e) {
+        console.log(e);
+        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+      }
+    };
+
     editArticle = (req, res) => {
       let { title, article } = req.body;
       let { articleId } = req.params;
