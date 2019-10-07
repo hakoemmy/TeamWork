@@ -1,36 +1,29 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import User from '../models/userModel';
+import Entity from '../models/crudQueries';
+import ResponseHandler from '../helpers/responseHandler';
 import {
-  UNAUTHORIZED, NOT_FOUND,
+  UNAUTHORIZED,
   BAD_REQUEST,
 } from '../helpers/statusCode';
 
 dotenv.config();
-
-const isEmployee = (req, res, next) => {
+const userModel = new Entity('users');
+const isEmployee = async (req, res, next) => {
   const token = req.header('x-auth-token');
   if (!token) {
-    return res.status(UNAUTHORIZED).send({
-      status: UNAUTHORIZED,
-      error: 'System rejected. No access token found!',
-    });
+    return ResponseHandler.error(UNAUTHORIZED, 'System rejected. No access token found!', res);
   }
 
   try {
     const { id } = jwt.verify(token, process.env.JWTSECRET);
-    if (!User.isUserExist(id)) {
-      return res.status(UNAUTHORIZED).send({
-        status: UNAUTHORIZED,
-        error: 'Awww, Snap!..Such kind of access token does not match any employee!',
-      });
+    const user = await userModel.select('*', 'id=$1', [id]);
+    if (!user.length) {
+      return ResponseHandler.error(UNAUTHORIZED, 'Awww, Snap!..Such kind of access token does not match any employee!', res);
     }
     next();
   } catch (error) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: error.message,
-    });
+    return ResponseHandler.error(BAD_REQUEST, error.message, res);
   }
 };
 

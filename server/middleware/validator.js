@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import Article from '../models/articleModel';
+import ResponseHandler from '../helpers/responseHandler';
 import {
   BAD_REQUEST, NOT_FOUND,
   FORBIDDEN,
@@ -33,10 +34,7 @@ const isSignupReqValid = (req, res, next) => {
   };
   const result = Joi.validate(req.body, schema);
   if (result.error !== null) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: `${result.error.details[0].message}`,
-    });
+    return ResponseHandler.error(BAD_REQUEST, `${result.error.details[0].message}`, res);
   }
   let {
     firstName, lastName,
@@ -51,26 +49,17 @@ const isSignupReqValid = (req, res, next) => {
         || !validateData(department)
         || !validateData(password)
   ) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'firstName, lastName, address, gender, jobRole, department,password  can\'t be empty',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'firstName, lastName, address, gender, jobRole, department,password  can\'t be empty', res);
   }
   if (!isNaN(firstName)
         || !isNaN(lastName)
         || !isNaN(jobRole)
         || !isNaN(department)
         || !isNaN(address)) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'firstName, lastName, JobRole, depatment and address can\'t be a number!',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'firstName, lastName, JobRole, depatment and address can\'t be a number!', res);
   }
   if (!isGenderValid(gender.toLowerCase().trim())) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'it seems that gender is invalid!',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'it seems that gender is invalid!', res);
   }
   next();
 };
@@ -81,10 +70,7 @@ const isSigninReqValid = (req, res, next) => {
   };
   const result = Joi.validate(req.body, schema);
   if (result.error !== null) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: `${result.error.details[0].message}`,
-    });
+    return ResponseHandler.error(BAD_REQUEST, `${result.error.details[0].message}`, res);
   }
   next();
 };
@@ -95,26 +81,17 @@ const isArticleReqValid = (req, res, next) => {
   };
   const result = Joi.validate(req.body, schema);
   if (result.error !== null) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: `${result.error.details[0].message}`,
-    });
+    return ResponseHandler.error(BAD_REQUEST, `${result.error.details[0].message}`, res);
   }
   let { title, article } = req.body;
   if (!validateData(title)
         || !validateData(article)
   ) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'title or article can\'t be empty',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'title or article can\'t be empty', res);
   }
   if (!isNaN(title)
         || !isNaN(article)) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'title or article can\'t be a number!',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'title or article can\'t be a number!', res);
   }
   next();
 };
@@ -122,22 +99,13 @@ const isTheOwner = (req, res, next) => {
   const employeeToken = req.header('x-auth-token').trim();
   let { articleId } = req.params;
   if (isNaN(articleId)) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'articleId can\'t be a string!',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'articleId can\'t be a string!', res);
   }
   if (!Article.isArticleExist(articleId)) {
-    return res.status(NOT_FOUND).send({
-      status: NOT_FOUND,
-      error: 'Such article is not found!',
-    });
+    return ResponseHandler.error(NOT_FOUND, 'Such article is not found!', res);
   }
   if (!Article.isOwnerOfArticle(articleId, employeeToken, res)) {
-    return res.status(FORBIDDEN).send({
-      status: FORBIDDEN,
-      error: 'Aww snap!.. you are not the owner of an article',
-    });
+    return ResponseHandler.error(FORBIDDEN, 'Aww snap!.. you are not the owner of an article', res);
   }
   next();
 };
@@ -147,25 +115,16 @@ const isCommentReqValid = (req, res, next) => {
   };
   const result = Joi.validate(req.body, schema);
   if (result.error !== null) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: `${result.error.details[0].message}`,
-    });
+    return ResponseHandler.error(BAD_REQUEST, `${result.error.details[0].message}`, res);
   }
   let { comment } = req.body;
   let { articleId } = req.params;
   articleId = articleId.trim();
   if (isNaN(articleId)) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'articleId can\'t be a string!',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'articleId can\'t be a string!', res);
   }
   if (!validateData(comment)) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'comment can\'t be empty',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'comment can\'t be empty', res);
   }
   next();
 };
@@ -173,16 +132,10 @@ const isItThere = (req, res, next) => {
   let { articleId } = req.params;
   articleId = articleId.trim();
   if (isNaN(articleId)) {
-    return res.status(BAD_REQUEST).send({
-      status: BAD_REQUEST,
-      error: 'articleId can\'t be a string!',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'articleId can\'t be a string!', res);
   }
   if (!Article.isArticleExist(articleId)) {
-    return res.status(NOT_FOUND).send({
-      status: NOT_FOUND,
-      error: 'Such article is not found!',
-    });
+    return ResponseHandler.error(BAD_REQUEST, 'Such article is not found!', res);
   }
   next();
 };
