@@ -16,7 +16,7 @@ const app = express();
 app.use(bodyParse.json());
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 app.use('/api/v1', isValidJson, articleRoute);
-app.use('/api/v1/auth', isContentTypeValid, isValidJson, userRoute);
+app.use('/api/v2/auth', isContentTypeValid, isValidJson, userRoute);
 
 
 app.use('/', (req, res) => {

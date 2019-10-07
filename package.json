@@ -4,7 +4,7 @@
   "description": "Teamwork is an internal social network for organizations' employees. The goal of this application is to facilitate more interaction between colleagues and facilitate team bonding.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=text --reporter=html mocha server/test --require @babel/polyfill --require @babel/register --timeout 10000 --exit",
+    "test": "babel-node ./server/models/entityQueries.js createTables && nyc --reporter=text --reporter=html mocha server/test --require @babel/polyfill --require @babel/register --timeout 10000 --exit",
     "start": " babel-node ./server/index.js",
     "dev-start": " nodemon --exec babel-node ./server/index.js",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
@@ -43,12 +43,12 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
-    "eslint": "^6.0.1",
+    "coveralls": "^3.0.5",
+    "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.0",
-    "nodemon": "^1.19.1",
     "mocha-lcov-reporter": "^1.3.0",
-    "coveralls": "^3.0.5"
+    "nodemon": "^1.19.1"
   },
   "repository": {
     "type": "git",
