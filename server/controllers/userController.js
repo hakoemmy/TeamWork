@@ -1,7 +1,7 @@
-import User from '../models/userModel';
 import Entity from '../models/crudQueries';
 import generateAuthToken from '../helpers/tokenEncoder';
 import encryptPassword from '../helpers/passwordEncryptor';
+import comparePassword from '../helpers/passwordMatcher';
 import {
   REQUEST_CONFLICT,
   RESOURCE_CREATED, REQUEST_SUCCEDED,
@@ -32,9 +32,9 @@ class UserController {
         const selectors = `'${firstName}', '${lastName}', '${email}', '${password}', '${gender}', '${jobRole}', '${department}', '${address}'`;
         const insertedRow = await this.userModel().insert(attributes, selectors);
 
-        const token = generateAuthToken(insertedRow[0].id);
+        const token = generateAuthToken(insertedRow[0].id, insertedRow[0].email);
 
-        return res.status(RESOURCE_CREATED).send({
+        return res.status(RESOURCE_CREATED).json({
           status: RESOURCE_CREATED,
           message: 'User created successfully',
           data: {
@@ -49,17 +49,30 @@ class UserController {
       }
     };
 
-    signIn = (req, res) => {
-      let { email, password } = req.body;
-      let loginPayload = {
-        email: email.trim(),
-        password: password.trim(),
-      };
-      const user = User.login(loginPayload);
-      if (user.status === REQUEST_SUCCEDED) {
-        return res.status(REQUEST_SUCCEDED).send(user);
+    static signIn = async (req, res) => {
+      try {
+        let { email, password } = req.body;
+        const row = await this.userModel().select('*', 'email=$1', [email]);
+        if (row[0] && comparePassword(password, row[0].password)) {
+          const token = generateAuthToken(row[0].id, row[0].email);
+          return res.status(REQUEST_SUCCEDED).json({
+            status: REQUEST_SUCCEDED,
+            message: 'User is successfully logged in',
+            data: {
+              token,
+            },
+          });
+        }
+        return res.status(UNAUTHORIZED).json({
+          status: UNAUTHORIZED,
+          error: 'email or password is incorrect!',
+        });
+      } catch (e) {
+        return res.status(SERVER_ERROR).json({
+          status: SERVER_ERROR,
+          error: 'OOps, Internal server error occured.',
+        });
       }
-      return res.status(UNAUTHORIZED).send(user);
     };
 }
 

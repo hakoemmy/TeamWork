@@ -180,10 +180,10 @@ describe('POST api/v2/auth/signup creating employee account', () => {
   });
 });
 
-describe.skip('POST api/v1/auth/signin email is missing', () => {
+describe('POST api/v2/auth/signin email is missing', () => {
   it('should return email is required', (done) => {
     chai.request(app)
-      .post('/api/v1/auth/signin')
+      .post('/api/v2/auth/signin')
       .set('Accept', 'application/json')
       .send(user[6])
       .end((err, res) => {
@@ -197,10 +197,10 @@ describe.skip('POST api/v1/auth/signin email is missing', () => {
 });
 
 
-describe.skip('POST api/v1/auth/signin employee signin success', () => {
+describe('POST api/v2/auth/signin employee signin success', () => {
   it('should return user is signed successfully', (done) => {
     chai.request(app)
-      .post('/api/v1/auth/signin')
+      .post('/api/v2/auth/signin')
       .set('Accept', 'application/json')
       .send(user[7])
       .end((err, res) => {
@@ -213,10 +213,10 @@ describe.skip('POST api/v1/auth/signin employee signin success', () => {
   });
 });
 
-describe.skip('POST api/v1/auth/signin employee signin failure', () => {
+describe('POST api/v2/auth/signin employee signin failure', () => {
   it('should return user is not logged in', (done) => {
     chai.request(app)
-      .post('/api/v1/auth/signin')
+      .post('/api/v2/auth/signin')
       .set('Accept', 'application/json')
       .send(user[8])
       .end((err, res) => {

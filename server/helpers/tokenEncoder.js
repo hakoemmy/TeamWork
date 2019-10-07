@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-const generateAuthToken = (id) => {
-  const token = jwt.sign({ id }, process.env.JWTSECRET);
+const generateAuthToken = (id, email) => {
+  const token = jwt.sign({ id, email }, process.env.JWTSECRET);
   return token;
 };
 
