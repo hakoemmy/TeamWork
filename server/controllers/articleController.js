@@ -2,6 +2,7 @@ import datetime from 'node-datetime';
 import Entity from '../models/crudQueries';
 import Article from '../models/articleModel';
 import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
+import ResponseHandler from '../helpers/responseHandler';
 import {
   RESOURCE_CREATED, REQUEST_SUCCEDED, SERVER_ERROR,
 } from '../helpers/statusCode';
@@ -21,18 +22,10 @@ class ArticleController {
         const attributes = 'authorid,title,article,created_on,updated_on';
         const selectors = `'${authorId}', '${title}', '${article}', '${currentDate}', '${currentDate}'`;
         const createdArticle = await this.articleModel().insert(attributes, selectors);
-
-        return res.status(RESOURCE_CREATED).json({
-          status: RESOURCE_CREATED,
-          message: 'article successfully created',
-          data: createdArticle,
-        });
+        return ResponseHandler.success(RESOURCE_CREATED, 'article successfully created', createdArticle, res);
       } catch (e) {
         console.log(e);
-        return res.status(SERVER_ERROR).json({
-          status: SERVER_ERROR,
-          error: 'OOps, Internal server error occured.',
-        });
+        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
       }
     };
 
