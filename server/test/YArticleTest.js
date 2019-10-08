@@ -4,7 +4,6 @@ import chaiHttp from 'chai-http';
 import dotenv from 'dotenv';
 
 import app from '../index';
-import ArticleModel from '../models/articleModel';
 import {
   NOT_FOUND,
   BAD_REQUEST, RESOURCE_CREATED,
@@ -19,22 +18,6 @@ const { expect } = chai;
 chai.use(chaiHttp);
 dotenv.config();
 
-ArticleModel.articles.push({
-  id: 1,
-  authorId: 2,
-  title: 'My journey in software development industry',
-  article: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  createdOn: '09/03/2019 12:04:59',
-  updatedOn: '09/03/2019 12:04:59',
-},
-{
-  id: 2,
-  authorId: 2,
-  title: 'My journey in software development industry',
-  article: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  createdOn: '09/03/2019 12:04:59',
-  updatedOn: '09/03/2019 12:04:59',
-});
 const validToken = generateAuthToken(1);
 const ownerToken = generateAuthToken(2);
 const noToken = ' ';
@@ -163,10 +146,10 @@ describe('POST api/v2/articles creating an article with invalid token', () => {
   });
 });
 
-describe.skip('PATCH api/v1/articles/:articleId title is missing', () => {
+describe('PATCH api/v2/articles/:articleId title is missing', () => {
   it('should return title is required', (done) => {
     chai.request(app)
-      .patch('/api/v1/articles/1')
+      .patch('/api/v2/articles/1')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .send(article[0])
@@ -181,10 +164,10 @@ describe.skip('PATCH api/v1/articles/:articleId title is missing', () => {
 });
 
 
-describe.skip('PATCH api/v1/articles/:articleId some fileds in payload are empty', () => {
+describe('PATCH api/v2/articles/:articleId some fileds in payload are empty', () => {
   it('should return request has empty fields', (done) => {
     chai.request(app)
-      .patch('/api/v1/articles/1')
+      .patch('/api/v2/articles/1')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .send(article[1])
@@ -199,10 +182,10 @@ describe.skip('PATCH api/v1/articles/:articleId some fileds in payload are empty
 });
 
 
-describe.skip('PATCH api/v1/articles/:articleId title and article can not be numbers!', () => {
+describe('PATCH api/v2/articles/:articleId title and article can not be numbers!', () => {
   it('should return request has some unallowed data', (done) => {
     chai.request(app)
-      .patch('/api/v1/articles/1')
+      .patch('/api/v2/articles/1')
       .set('Accept', 'application/json')
       .send(article[2])
       .set('x-auth-token', validToken)
@@ -217,10 +200,10 @@ describe.skip('PATCH api/v1/articles/:articleId title and article can not be num
 });
 
 
-describe.skip('PATCH api/v1/articles/:articleId articleId param', () => {
+describe('PATCH api/v2/articles/:articleId articleId param', () => {
   it('should return articleId param can not be a string', (done) => {
     chai.request(app)
-      .patch('/api/v1/articles/mm')
+      .patch('/api/v2/articles/mm')
       .set('Accept', 'application/json')
       .send(article[3])
       .set('x-auth-token', validToken)
@@ -235,10 +218,10 @@ describe.skip('PATCH api/v1/articles/:articleId articleId param', () => {
 });
 
 
-describe.skip('PATCH api/v1/articles/:articleId articleId param', () => {
+describe('PATCH api/v2/articles/:articleId articleId param', () => {
   it('should return articleId param is not found', (done) => {
     chai.request(app)
-      .patch('/api/v1/articles/900')
+      .patch('/api/v2/articles/900')
       .set('Accept', 'application/json')
       .send(article[3])
       .set('x-auth-token', validToken)
@@ -253,10 +236,10 @@ describe.skip('PATCH api/v1/articles/:articleId articleId param', () => {
 });
 
 
-describe.skip('PATCH api/v1/articles/:articleId article ownership', () => {
+describe('PATCH api/v2/articles/:articleId article ownership', () => {
   it('should return you are not owner of an article', (done) => {
     chai.request(app)
-      .patch('/api/v1/articles/1')
+      .patch('/api/v2/articles/1')
       .set('Accept', 'application/json')
       .send(article[3])
       .set('x-auth-token', validToken)
@@ -271,10 +254,10 @@ describe.skip('PATCH api/v1/articles/:articleId article ownership', () => {
 });
 
 
-describe.skip('PATCH api/v1/articles/:articleId article ', () => {
+describe('PATCH api/v2/articles/:articleId article ', () => {
   it('should return article successfully edited', (done) => {
     chai.request(app)
-      .patch('/api/v1/articles/1')
+      .patch('/api/v2/articles/1')
       .set('Accept', 'application/json')
       .send(article[3])
       .set('x-auth-token', ownerToken)
