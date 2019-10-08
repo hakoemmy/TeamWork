@@ -271,10 +271,10 @@ describe('PATCH api/v2/articles/:articleId article ', () => {
   });
 });
 
-describe.skip('DELETE api/v1/articles/:articleId articleId param', () => {
+describe('DELETE api/v2/articles/:articleId articleId param', () => {
   it('should return articleId param can not be a string', (done) => {
     chai.request(app)
-      .delete('/api/v1/articles/mm')
+      .delete('/api/v2/articles/mm')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .end((err, res) => {
@@ -288,10 +288,10 @@ describe.skip('DELETE api/v1/articles/:articleId articleId param', () => {
 });
 
 
-describe.skip('DELETE api/v1/articles/:articleId articleId param', () => {
+describe('DELETE api/v2/articles/:articleId articleId param', () => {
   it('should return articleId param is not found', (done) => {
     chai.request(app)
-      .delete('/api/v1/articles/900')
+      .delete('/api/v2/articles/900')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .end((err, res) => {
@@ -304,10 +304,10 @@ describe.skip('DELETE api/v1/articles/:articleId articleId param', () => {
   });
 });
 
-describe.skip('DELETE api/v1/articles/:articleId article ownership', () => {
+describe('DELETE api/v2/articles/:articleId article ownership', () => {
   it('should return you are not owner of an article', (done) => {
     chai.request(app)
-      .delete('/api/v1/articles/1')
+      .delete('/api/v2/articles/1')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .end((err, res) => {
@@ -321,10 +321,10 @@ describe.skip('DELETE api/v1/articles/:articleId article ownership', () => {
 });
 
 
-describe.skip('DELETE api/v1/articles/:articleId article ', () => {
+describe('DELETE api/v2/articles/:articleId article ', () => {
   it('should return article successfully deleted', (done) => {
     chai.request(app)
-      .delete('/api/v1/articles/1')
+      .delete('/api/v2/articles/1')
       .set('Accept', 'application/json')
       .set('x-auth-token', ownerToken)
       .end((err, res) => {
