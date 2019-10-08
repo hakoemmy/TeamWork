@@ -42,22 +42,32 @@ class ArticleController {
     };
 
     static editArticle = async (req, res) => {
-      let { title, article } = req.body;
-      let { articleId } = req.params;
-      const currentDate = datetime.create().format('m/d/Y H:M:S');
+      try {
+        let { title, article } = req.body;
+        let { articleId } = req.params;
+        const currentDate = datetime.create().format('m/d/Y H:M:S');
 
-      ArticleController.articleModel().update('title=$1', 'id=$2', [title, articleId]);
-      ArticleController.articleModel().update('article=$1', 'id=$2', [article, articleId]);
-      ArticleController.articleModel().update('updated_on=$1', 'id=$2', [currentDate, articleId]);
+        ArticleController.articleModel().update('title=$1', 'id=$2', [title, articleId]);
+        ArticleController.articleModel().update('article=$1', 'id=$2', [article, articleId]);
+        ArticleController.articleModel().update('updated_on=$1', 'id=$2', [currentDate, articleId]);
 
-      return ResponseHandler.success(REQUEST_SUCCEDED, 'article successfully edited', req.body, res);
+        return ResponseHandler.success(REQUEST_SUCCEDED, 'article successfully edited', req.body, res);
+      } catch (e) {
+        console.log(e);
+        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+      }
     };
 
-    deleteArticle = (req, res) => {
-      let { articleId } = req.params;
-      articleId = articleId.trim();
-      const response = Article.delete(articleId);
-      return res.status(REQUEST_SUCCEDED).send(response);
+    static deleteArticle = async (req, res) => {
+      try {
+        let { articleId } = req.params;
+        articleId = articleId.trim();
+        await ArticleController.articleModel().delete('id=$1', [articleId]);
+        return ResponseHandler.success(REQUEST_SUCCEDED, 'article successfully deleted', null, res);
+      } catch (e) {
+        console.log(e);
+        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+      }
     };
 
     getAllArticle = (req, res) => {

@@ -11,7 +11,10 @@ import {
   from '../middleware/validator';
 
 const router = express.Router();
-const { createArticle, getMyArticle, editArticle } = ArticleController;
+const {
+  createArticle, getMyArticle,
+  editArticle, deleteArticle,
+} = ArticleController;
 
 
 router.post('/articles',
@@ -28,4 +31,8 @@ router.patch('/articles/:articleId',
   isArticleReqValid,
   isTheOwner,
   editArticle);
+router.delete('/articles/:articleId',
+  isEmployee,
+  isTheOwner,
+  deleteArticle);
 export default router;
