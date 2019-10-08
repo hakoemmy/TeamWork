@@ -1,11 +1,13 @@
 import Joi from 'joi';
 import Article from '../models/articleModel';
 import ResponseHandler from '../helpers/responseHandler';
+import Entity from '../models/crudQueries';
+import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
 import {
   BAD_REQUEST, NOT_FOUND,
   FORBIDDEN,
 } from '../helpers/statusCode';
-
+const articleModel = new Entity('articles');
 const validateData = (field) => {
   const entity = field.replace(/[^a-zA-Z0-9]/g, '');
   if (entity) return true;
@@ -95,16 +97,18 @@ const isArticleReqValid = (req, res, next) => {
   }
   next();
 };
-const isTheOwner = (req, res, next) => {
+const isTheOwner = async (req, res, next) => {
   const employeeToken = req.header('x-auth-token').trim();
   let { articleId } = req.params;
   if (isNaN(articleId)) {
     return ResponseHandler.error(BAD_REQUEST, 'articleId can\'t be a string!', res);
   }
-  if (!Article.isArticleExist(articleId)) {
+  const article = await articleModel.select('*', 'id=$1', [articleId]);
+  if (!article.length) {
     return ResponseHandler.error(NOT_FOUND, 'Such article is not found!', res);
   }
-  if (!Article.isOwnerOfArticle(articleId, employeeToken, res)) {
+  const authorId = grabEmployeeIdFromToken(employeeToken, res);
+  if (!(article[0].authorid === authorId)) {
     return ResponseHandler.error(FORBIDDEN, 'Aww snap!.. you are not the owner of an article', res);
   }
   next();

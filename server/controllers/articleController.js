@@ -41,18 +41,16 @@ class ArticleController {
       }
     };
 
-    editArticle = (req, res) => {
+    static editArticle = async (req, res) => {
       let { title, article } = req.body;
       let { articleId } = req.params;
+      const currentDate = datetime.create().format('m/d/Y H:M:S');
 
-      let trustedPayload = {
-        title: title.trim(),
-        article: article.trim(),
-      };
-      const employeeToken = req.header('x-auth-token').trim();
-      articleId = articleId.trim();
-      const response = Article.edit(trustedPayload, articleId, employeeToken, res);
-      return res.status(REQUEST_SUCCEDED).send(response);
+      ArticleController.articleModel().update('title=$1', 'id=$2', [title, articleId]);
+      ArticleController.articleModel().update('article=$1', 'id=$2', [article, articleId]);
+      ArticleController.articleModel().update('updated_on=$1', 'id=$2', [currentDate, articleId]);
+
+      return ResponseHandler.success(REQUEST_SUCCEDED, 'article successfully edited', req.body, res);
     };
 
     deleteArticle = (req, res) => {

@@ -11,7 +11,7 @@ import {
   from '../middleware/validator';
 
 const router = express.Router();
-const { createArticle, getMyArticle } = ArticleController;
+const { createArticle, getMyArticle, editArticle } = ArticleController;
 
 
 router.post('/articles',
@@ -22,4 +22,10 @@ router.post('/articles',
 router.get('/articles',
   isEmployee,
   getMyArticle);
+router.patch('/articles/:articleId',
+  isValidContentType,
+  isEmployee,
+  isArticleReqValid,
+  isTheOwner,
+  editArticle);
 export default router;
