@@ -1,6 +1,5 @@
 import express from 'express';
 import ArticleController from '../controllers/articleController';
-import CommentController from '../controllers/commentController';
 import isEmployee from '../middleware/isEmployee';
 import isValidContentType from '../middleware/isContentTypeValid';
 import {
@@ -14,7 +13,7 @@ const router = express.Router();
 const {
   createArticle, getMyArticle,
   editArticle, deleteArticle,
-  getAllArticle,
+  getAllArticle, getSpecificArticle,
 } = ArticleController;
 
 
@@ -39,4 +38,8 @@ router.delete('/articles/:articleId',
 router.get('/feeds',
   isEmployee,
   getAllArticle);
+router.get('/articles/:articleId',
+  isEmployee,
+  isItThere,
+  getSpecificArticle);
 export default router;

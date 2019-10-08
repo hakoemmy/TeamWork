@@ -1,5 +1,4 @@
 import Joi from 'joi';
-import Article from '../models/articleModel';
 import ResponseHandler from '../helpers/responseHandler';
 import Entity from '../models/crudQueries';
 import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
@@ -7,6 +6,7 @@ import {
   BAD_REQUEST, NOT_FOUND,
   FORBIDDEN,
 } from '../helpers/statusCode';
+
 const articleModel = new Entity('articles');
 const validateData = (field) => {
   const entity = field.replace(/[^a-zA-Z0-9]/g, '');
@@ -132,14 +132,15 @@ const isCommentReqValid = (req, res, next) => {
   }
   next();
 };
-const isItThere = (req, res, next) => {
+const isItThere = async (req, res, next) => {
   let { articleId } = req.params;
   articleId = articleId.trim();
   if (isNaN(articleId)) {
     return ResponseHandler.error(BAD_REQUEST, 'articleId can\'t be a string!', res);
   }
-  if (!Article.isArticleExist(articleId)) {
-    return ResponseHandler.error(BAD_REQUEST, 'Such article is not found!', res);
+  const articleFound = await articleModel.select('*', 'id=$1', [articleId]);
+  if (!articleFound.length) {
+    return ResponseHandler.error(NOT_FOUND, 'Such article is not found!', res);
   }
   next();
 };
