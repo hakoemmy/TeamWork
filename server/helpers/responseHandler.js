@@ -1,18 +1,10 @@
 
 class Handler {
-  success = (code, message, payload, res) => {
-    if (payload != null) {
-      return res.status(code).json({
-        status: code,
-        message,
-        data: payload,
-      });
-    }
-    return res.status(code).json({
-      status: code,
-      message,
-    });
-  };
+  success = (code, message, payload, res) => res.status(code).json({
+    status: code,
+    message,
+    data: payload,
+  });
 
     error = (code, message, res) => res.status(code).json({
       status: code,
