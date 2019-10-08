@@ -337,10 +337,10 @@ describe('DELETE api/v2/articles/:articleId article ', () => {
   });
 });
 
-describe.skip('GET api/v1/feeds Get all articles ', () => {
+describe('GET api/v2/feeds Get all articles ', () => {
   it('should return an array of All artiles ', (done) => {
     chai.request(app)
-      .get('/api/v1/feeds')
+      .get('/api/v2/feeds')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .end((err, res) => {

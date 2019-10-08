@@ -14,6 +14,7 @@ const router = express.Router();
 const {
   createArticle, getMyArticle,
   editArticle, deleteArticle,
+  getAllArticle,
 } = ArticleController;
 
 
@@ -35,4 +36,7 @@ router.delete('/articles/:articleId',
   isEmployee,
   isTheOwner,
   deleteArticle);
+router.get('/feeds',
+  isEmployee,
+  getAllArticle);
 export default router;

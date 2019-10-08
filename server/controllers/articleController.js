@@ -70,9 +70,16 @@ class ArticleController {
       }
     };
 
-    getAllArticle = (req, res) => {
-      const articleFeeds = Article.getAll();
-      return res.status(REQUEST_SUCCEDED).send(articleFeeds);
+    static getAllArticle = async (req, res) => {
+      try {
+        let allArticles = await this.articleModel().select('*');
+        const sortedArticles = allArticles.sort((a, b) => (new Date(b.created_on)).getTime()
+        - (new Date(a.created_on)).getTime());
+        return ResponseHandler.success(REQUEST_SUCCEDED, 'success', sortedArticles, res);
+      } catch (e) {
+        console.log(e);
+        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+      }
     };
 
     getSpecificArticle = (req, res) => {
