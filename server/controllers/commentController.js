@@ -38,7 +38,7 @@ class CommentController {
      };
      return ResponseHandler.success(RESOURCE_CREATED, 'comment successfully added', response, res);
    } catch (e) {
-     return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+     return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
    }
  };
 }

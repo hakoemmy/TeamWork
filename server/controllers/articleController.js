@@ -27,7 +27,7 @@ class ArticleController {
         const createdArticle = await this.articleModel().insert(attributes, selectors);
         return ResponseHandler.success(RESOURCE_CREATED, 'article successfully created', createdArticle, res);
       } catch (e) {
-        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+        return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }
     };
 
@@ -38,7 +38,7 @@ class ArticleController {
         const articles = await this.articleModel().select('*', 'authorid=$1', [authorId]);
         return ResponseHandler.success(REQUEST_SUCCEDED, 'Your articles returned successfully', articles, res);
       } catch (e) {
-        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+        return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }
     };
 
@@ -54,7 +54,7 @@ class ArticleController {
 
         return ResponseHandler.success(REQUEST_SUCCEDED, 'article successfully edited', req.body, res);
       } catch (e) {
-        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+        return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }
     };
 
@@ -65,7 +65,7 @@ class ArticleController {
         await ArticleController.articleModel().delete('id=$1', [articleId]);
         return ResponseHandler.success(REQUEST_SUCCEDED, 'article successfully deleted', null, res);
       } catch (e) {
-        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+        return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }
     };
 
@@ -76,7 +76,7 @@ class ArticleController {
         - (new Date(a.created_on)).getTime());
         return ResponseHandler.success(REQUEST_SUCCEDED, 'success', sortedArticles, res);
       } catch (e) {
-        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+        return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }
     };
 
@@ -105,7 +105,7 @@ class ArticleController {
         };
         return ResponseHandler.success(REQUEST_SUCCEDED, 'success', response, res);
       } catch (e) {
-        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+        return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }
     };
 }
