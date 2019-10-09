@@ -35,7 +35,7 @@ class UserController {
 
         return ResponseHandler.success(RESOURCE_CREATED, 'User created successfully', { token }, res);
       } catch (e) {
-        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+        return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }
     };
 
@@ -49,7 +49,7 @@ class UserController {
         }
         return ResponseHandler.error(UNAUTHORIZED, 'email or password is incorrect!', res);
       } catch (e) {
-        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+        return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }
     };
 }

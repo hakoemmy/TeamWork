@@ -1,5 +1,6 @@
 import express from 'express';
 import ArticleController from '../controllers/articleController';
+import CommentController from '../controllers/commentController';
 import isEmployee from '../middleware/isEmployee';
 import isValidContentType from '../middleware/isContentTypeValid';
 import {
@@ -16,6 +17,7 @@ const {
   getAllArticle, getSpecificArticle,
 } = ArticleController;
 
+const { commentOnArticle } = CommentController;
 
 router.post('/articles',
   isValidContentType,
@@ -42,4 +44,10 @@ router.get('/articles/:articleId',
   isEmployee,
   isItThere,
   getSpecificArticle);
+router.post('/articles/:articleId/comments',
+  isValidContentType,
+  isEmployee,
+  isCommentReqValid,
+  isItThere,
+  commentOnArticle);
 export default router;
