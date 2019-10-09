@@ -20,10 +20,10 @@ dotenv.config();
 const validToken = generateAuthToken(1);
 
 
-describe.skip('POST api/v1/articles/:articleId with Invalid signature token', () => {
+describe('POST api/v2/articles/:articleId with Invalid signature token', () => {
   it('should return Invalid token', (done) => {
     chai.request(app)
-      .post('/api/v1/articles/2/comments')
+      .post('/api/v2/articles/2/comments')
       .set('Accept', 'application/json')
       .set('x-auth-token', process.env.INVALID_TOKEN)
       .send(comment[2])
@@ -37,10 +37,10 @@ describe.skip('POST api/v1/articles/:articleId with Invalid signature token', ()
 });
 
 
-describe.skip('POST api/v1/articles comment field is missing', () => {
+describe('POST api/v2/articles comment field is missing', () => {
   it('should return comment is required', (done) => {
     chai.request(app)
-      .post('/api/v1/articles/1/comments')
+      .post('/api/v2/articles/1/comments')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .send(comment[0])
@@ -55,10 +55,10 @@ describe.skip('POST api/v1/articles comment field is missing', () => {
 });
 
 
-describe.skip('POST /api/v1/articles/:articleId/comments articleId param', () => {
+describe('POST /api/v2/articles/:articleId/comments articleId param', () => {
   it('should return articleId param can not be a string', (done) => {
     chai.request(app)
-      .post('/api/v1/articles/mm/comments')
+      .post('/api/v2/articles/mm/comments')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .send(comment[1])
@@ -73,10 +73,10 @@ describe.skip('POST /api/v1/articles/:articleId/comments articleId param', () =>
 });
 
 
-describe.skip('POST /api/v1/articles/:articleId/comments', () => {
+describe('POST /api/v2/articles/:articleId/comments', () => {
   it('should return comment can not be empty', (done) => {
     chai.request(app)
-      .post('/api/v1/articles/1/comments')
+      .post('/api/v2/articles/1/comments')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('x-auth-token', validToken)
@@ -92,10 +92,10 @@ describe.skip('POST /api/v1/articles/:articleId/comments', () => {
 });
 
 
-describe.skip('POST /api/v1/articles/:articleId/comments artilceId param', () => {
+describe('POST /api/v2/articles/:articleId/comments artilceId param', () => {
   it('should return article is not found', (done) => {
     chai.request(app)
-      .post('/api/v1/articles/900/comments')
+      .post('/api/v2/articles/900/comments')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('x-auth-token', validToken)
@@ -111,10 +111,10 @@ describe.skip('POST /api/v1/articles/:articleId/comments artilceId param', () =>
 });
 
 
-describe.skip('POST /api/v1/articles/:articleId/comments adding comment', () => {
+describe('POST /api/v2/articles/:articleId/comments adding comment', () => {
   it('should return comment successfully added', (done) => {
     chai.request(app)
-      .post('/api/v1/articles/2/comments')
+      .post('/api/v2/articles/2/comments')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('x-auth-token', validToken)

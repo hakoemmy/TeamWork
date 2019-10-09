@@ -389,6 +389,22 @@ describe('GET api/v2/articles/:articleId articleId param', () => {
 describe('GET api/v2/articles/:articleId Get article by Id', () => {
   it('should return acertain article', (done) => {
     chai.request(app)
+      .get('/api/v2/articles')
+      .set('Accept', 'application/json')
+      .set('x-auth-token', validToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.status).to.equal(REQUEST_SUCCEDED);
+        expect(res.body.message).to.equal('Your articles returned successfully');
+        done();
+      });
+  });
+});
+
+describe('GET api/v2/articles My articles', () => {
+  it('should return my articles', (done) => {
+    chai.request(app)
       .get('/api/v2/articles/2')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
