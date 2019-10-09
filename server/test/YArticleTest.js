@@ -353,10 +353,10 @@ describe('GET api/v2/feeds Get all articles ', () => {
   });
 });
 
-describe.skip('GET api/v1/articles/:articleId articleId param', () => {
+describe('GET api/v2/articles/:articleId articleId param', () => {
   it('should return articleId param can not be a string', (done) => {
     chai.request(app)
-      .get('/api/v1/articles/mm')
+      .get('/api/v2/articles/mm')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .end((err, res) => {
@@ -369,10 +369,10 @@ describe.skip('GET api/v1/articles/:articleId articleId param', () => {
   });
 });
 
-describe.skip('GET api/v1/articles/:articleId articleId param', () => {
+describe('GET api/v2/articles/:articleId articleId param', () => {
   it('should return articleId param is not found', (done) => {
     chai.request(app)
-      .get('/api/v1/articles/900')
+      .get('/api/v2/articles/900')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .end((err, res) => {
@@ -386,10 +386,10 @@ describe.skip('GET api/v1/articles/:articleId articleId param', () => {
 });
 
 
-describe.skip('GET api/v1/articles/:articleId Get article by Id', () => {
+describe('GET api/v2/articles/:articleId Get article by Id', () => {
   it('should return acertain article', (done) => {
     chai.request(app)
-      .get('/api/v1/articles/2')
+      .get('/api/v2/articles/2')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
       .end((err, res) => {

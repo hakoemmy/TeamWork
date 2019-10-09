@@ -1,6 +1,5 @@
 import datetime from 'node-datetime';
 import Entity from '../models/crudQueries';
-import Article from '../models/articleModel';
 import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
 import ResponseHandler from '../helpers/responseHandler';
 import {
@@ -11,6 +10,10 @@ import {
 class ArticleController {
   static articleModel() {
     return new Entity('articles');
+  }
+
+  static commentModel() {
+    return new Entity('comments');
   }
 
     static createArticle = async (req, res) => {
@@ -82,11 +85,33 @@ class ArticleController {
       }
     };
 
-    getSpecificArticle = (req, res) => {
-      let { articleId } = req.params;
-      articleId = articleId.trim();
-      const article = Article.getArticleById(articleId);
-      return res.status(REQUEST_SUCCEDED).send(article);
+    static getSpecificArticle = async (req, res) => {
+      try {
+        let { articleId } = req.params;
+        articleId = articleId.trim();
+        const acertainArticle = await this.articleModel().select('*', 'id=$1', [articleId]);
+        let {
+          id,
+          authorid,
+          title,
+          article,
+          created_on,
+          updated_on,
+        } = acertainArticle[0];
+        const comments = await this.commentModel().select('*', 'articleid=$1', [id]);
+        let response = {
+          id,
+          authorid,
+          title,
+          article,
+          created_on,
+          updated_on,
+          comments,
+        };
+        return ResponseHandler.success(REQUEST_SUCCEDED, 'success', response, res);
+      } catch (e) {
+        return ResponseHandler.error(SERVER_ERROR, 'OOps, Internal server error occured.', res);
+      }
     };
 }
 
