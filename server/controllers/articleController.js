@@ -3,7 +3,7 @@ import Entity from '../models/crudQueries';
 import grabEmployeeIdFromToken from '../helpers/tokenDecoder';
 import ResponseHandler from '../helpers/responseHandler';
 import {
-  RESOURCE_CREATED, REQUEST_SUCCEDED, SERVER_ERROR,
+  RESOURCE_CREATED, REQUEST_SUCCEDED, SERVER_ERROR, REQUEST_CONFLICT,
 } from '../helpers/statusCode';
 
 
@@ -22,6 +22,11 @@ class ArticleController {
         let token = req.header('x-auth-token');
         const authorId = grabEmployeeIdFromToken(token, res);
         const currentDate = datetime.create().format('m/d/Y H:M:S');
+        const articles = await this.articleModel().select('*', 'authorid=$1', [authorId]);
+        const foundArticle = articles.find(a => a.title === title);
+        if (foundArticle) {
+          return ResponseHandler.error(REQUEST_CONFLICT, 'The same article exists', res);
+        }
         const attributes = 'authorid,title,article,created_on,updated_on';
         const selectors = `'${authorId}', '${title}', '${article}', '${currentDate}', '${currentDate}'`;
         const createdArticle = await this.articleModel().insert(attributes, selectors);
@@ -63,7 +68,7 @@ class ArticleController {
         let { articleId } = req.params;
         articleId = articleId.trim();
         await ArticleController.articleModel().delete('id=$1', [articleId]);
-        return ResponseHandler.success(REQUEST_SUCCEDED, 'article successfully deleted', null, res);
+        return ResponseHandler.success(REQUEST_SUCCEDED, 'article successfully deleted', [], res);
       } catch (e) {
         return ResponseHandler.error(SERVER_ERROR, `OOps, Internal server error occured: ${e} `, res);
       }

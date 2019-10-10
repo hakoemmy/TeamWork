@@ -61,7 +61,7 @@ describe('POST /api/v2/articles/:articleId/comments articleId param', () => {
       .post('/api/v2/articles/mm/comments')
       .set('Accept', 'application/json')
       .set('x-auth-token', validToken)
-      .send(comment[1])
+      .send(comment[2])
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(BAD_REQUEST);
@@ -85,7 +85,7 @@ describe('POST /api/v2/articles/:articleId/comments', () => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(BAD_REQUEST);
         expect(res.body.status).to.equal(BAD_REQUEST);
-        expect(res.body.error).to.equal('comment can\'t be empty');
+        expect(res.body.error).to.equal('"comment" is not allowed to be empty');
         done();
       });
   });

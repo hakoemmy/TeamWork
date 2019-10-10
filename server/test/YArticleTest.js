@@ -53,7 +53,7 @@ describe('POST api/v2/articles some fileds in payload are empty', () => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(BAD_REQUEST);
         expect(res.body.status).to.equal(BAD_REQUEST);
-        expect(res.body.error).to.equal('title or article can\'t be empty');
+        expect(res.body.error).to.equal('"title" is not allowed to be empty');
         done();
       });
   });
@@ -175,7 +175,7 @@ describe('PATCH api/v2/articles/:articleId some fileds in payload are empty', ()
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(BAD_REQUEST);
         expect(res.body.status).to.equal(BAD_REQUEST);
-        expect(res.body.error).to.equal('title or article can\'t be empty');
+        expect(res.body.error).to.equal('"title" is not allowed to be empty');
         done();
       });
   });
