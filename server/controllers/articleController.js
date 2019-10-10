@@ -22,11 +22,11 @@ class ArticleController {
         let token = req.header('x-auth-token');
         const authorId = grabEmployeeIdFromToken(token, res);
         const currentDate = datetime.create().format('m/d/Y H:M:S');
-        // const articles = await this.articleModel().select('*', 'authorid=$1', [authorId]);
-        // const foundArticle = articles.find(a => a.title === title);
-        // if (foundArticle) {
-        //   return ResponseHandler.error(REQUEST_CONFLICT, 'The same article exists', res);
-        // }
+        const articles = await this.articleModel().select('*', 'authorid=$1', [authorId]);
+        const foundArticle = articles.find(a => a.title === title);
+        if (foundArticle) {
+          return ResponseHandler.error(REQUEST_CONFLICT, 'The same article exists', res);
+        }
         const attributes = 'authorid,title,article,created_on,updated_on';
         const selectors = `'${authorId}', '${title}', '${article}', '${currentDate}', '${currentDate}'`;
         const createdArticle = await this.articleModel().insert(attributes, selectors);
