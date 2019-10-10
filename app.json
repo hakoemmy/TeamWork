@@ -2,7 +2,7 @@
  "swagger": "2.0",
  "info": {
   "description": "Teamwork is an internal social network for organizations’ employees.",
-  "version": "v1",
+  "version": "v2",
   "title": "TeamWork APIs docs",
   "termsOfService": "http://swagger.io/terms/",
   "contact": {
@@ -14,7 +14,7 @@
   }
  },
  "host": "team---work.herokuapp.com",
- "basePath": "/api/v1",
+ "basePath": "/api/v2",
  "tags": [
   {
    "name": "User",

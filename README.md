@@ -52,9 +52,9 @@ The project is composed of two different parts:
       Run ```npm run dev-start ```
   - Live
 
-     The API enpoints are hosted on this URL: ``` https://team---work.herokuapp.com/ ```
+     The API enpoints are hosted on this URL [link here](https://team---work.herokuapp.com/)
 ## API documentation
- Just follow: ``` https://team---work.herokuapp.com/docs ``` link for testing all API endpoints like so
+ Just follow [API documentation](https://team---work.herokuapp.com/docs) link for testing all API endpoints like so
 ## Running the UI Template
 
   - Just run `index.html` from the cloned project

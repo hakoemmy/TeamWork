@@ -25,14 +25,14 @@ const isGenderValid = (gender) => {
 
 const isSignupReqValid = (req, res, next) => {
   const schema = {
-    firstName: Joi.string().min(4).required(),
-    lastName: Joi.string().min(4).required(),
-    email: Joi.string().email().required(),
+    firstName: Joi.string().min(4).trim().required(),
+    lastName: Joi.string().min(4).trim().required(),
+    email: Joi.string().email().trim().required(),
     password: Joi.string().min(8).required(),
-    address: Joi.string().required(),
-    gender: Joi.string().required(),
-    jobRole: Joi.string().required(),
-    department: Joi.string().required(),
+    address: Joi.string().trim().required(),
+    gender: Joi.string().trim().required(),
+    jobRole: Joi.string().trim().required(),
+    department: Joi.string().trim().required(),
   };
   const result = Joi.validate(req.body, schema);
   if (result.error !== null) {
@@ -67,7 +67,7 @@ const isSignupReqValid = (req, res, next) => {
 };
 const isSigninReqValid = (req, res, next) => {
   const schema = {
-    email: Joi.string().email().required(),
+    email: Joi.string().email().trim().required(),
     password: Joi.required(),
   };
   const result = Joi.validate(req.body, schema);
@@ -78,8 +78,8 @@ const isSigninReqValid = (req, res, next) => {
 };
 const isArticleReqValid = (req, res, next) => {
   const schema = {
-    title: Joi.string().required(),
-    article: Joi.string().required(),
+    title: Joi.string().trim().required(),
+    article: Joi.string().trim().required(),
   };
   const result = Joi.validate(req.body, schema);
   if (result.error !== null) {
@@ -115,7 +115,7 @@ const isTheOwner = async (req, res, next) => {
 };
 const isCommentReqValid = (req, res, next) => {
   const schema = {
-    comment: Joi.string().required(),
+    comment: Joi.string().trim().required(),
   };
   const result = Joi.validate(req.body, schema);
   if (result.error !== null) {
