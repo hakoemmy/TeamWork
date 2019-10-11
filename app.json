@@ -153,7 +153,41 @@
       "description": "Aww snap!.. you are not the owner of an article"
      }
     }
+   },
+   "get": {
+    "tags": [
+     "Article"
+    ],
+    "summary": "Employee can view his posted articles",
+    "description": "",
+    "operationId": "view-my-article",
+    "produces": [
+     "application/xml",
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "x-auth-token",
+      "in": "header",
+      "type": "string",
+      "description": "The value to provide in the  header of API request"
+     },
+     {
+      "name": "Article details",
+      "in": "body",
+      "required": true
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "article successfully created"
+     },
+     "403": {
+      "description": "Aww snap!.. you are not the owner of an article"
+     }
+    }
    }
+
   },
   "/feeds": {
     "get": {
@@ -174,6 +208,7 @@
      }
     }
    },
+   
    "/articles/{articleId}": {
     "get": {
      "tags": [
