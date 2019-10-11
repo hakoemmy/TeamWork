@@ -54,7 +54,7 @@ The project is composed of two different parts:
 
      The API enpoints are hosted on this URL [link here](https://team---work.herokuapp.com/)
 ## API documentation
- Just follow [API documentation](https://team---work.herokuapp.com/docs) link for testing all API endpoints like so
+ Just follow [API documentation](http://team---work.herokuapp.com/docs) link for testing all API endpoints like so
 ## Running the UI Template
 
   - Just run `index.html` from the cloned project
